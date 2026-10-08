@@ -9,13 +9,13 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 
 ## Phase 0 — Préparation et bases (Salah 7,5 j · Samad 8 j)
 
-- [ ] **T01** Installer l'environnement : VS Code, Node.js LTS, Git, compte GitHub, dépôt du projet — Les deux · 0,5 j · après : —
-- [ ] **T02** Apprendre Git et GitHub : commit, branche, pull request, conflit simple — Les deux · 0,5 j · après : T01
-- [ ] **T03** Réviser HTML, CSS et JavaScript moderne (fetch, async/await, modules) en construisant une petite page — Les deux · 3 j · après : T01
-- [ ] **T04** Comprendre HTTP, JSON et les API REST en testant une API publique avec Thunder Client — Les deux · 0,5 j · après : T03
-- [ ] **T05** Apprendre les bases de SQL : SELECT, INSERT, JOIN, clés étrangères — Les deux · 1 j · après : T01
+- [x] **T01** Installer l'environnement : VS Code, Node.js LTS, Git, compte GitHub, dépôt du projet — Les deux · 0,5 j · après : —
+- [x] **T02** Apprendre Git et GitHub : commit, branche, pull request, conflit simple — Les deux · 0,5 j · après : T01
+- [x] **T03** Réviser HTML, CSS et JavaScript moderne (fetch, async/await, modules) en construisant une petite page — Les deux · 3 j · après : T01
+- [x] **T04** Comprendre HTTP, JSON et les API REST en testant une API publique avec Thunder Client — Les deux · 0,5 j · après : T03
+- [x] **T05** Apprendre les bases de SQL : SELECT, INSERT, JOIN, clés étrangères — Les deux · 1 j · après : T01
 - [ ] **T06** Rédiger le cahier des charges et dessiner le schéma de la base (tables et relations) — Salah · 1,5 j · après : T05
-- [ ] **T07** Dessiner les maquettes des pages client et admin (Figma ou papier) — Samad · 2 j · après : T04
+- [x] **T07** Dessiner les maquettes des pages client et admin (Figma ou papier) — Samad · 2 j · après : T04
 - [ ] **T08** Définir ensemble le contrat d'API : routes, paramètres, exemples de réponses JSON — Les deux · 0,5 j · après : T06, T07
 
 ## Phase 1 — Fondations techniques (Salah 3 j · Samad 4 j)
