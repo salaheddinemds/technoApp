@@ -10,8 +10,8 @@
 
 ### Salah
 - En cours : rien
-- Dernière séance : 2026-10-08, mise en place du kit Copilot
-- Prochain pas : T01
+- Dernière séance : 2026-10-08, T01 à T05 terminées
+- Prochain pas : T06
 - Bloquants : aucun
 
 ### Samad
@@ -35,7 +35,8 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 ### 2026-10-08
 - Fait : kit Copilot ajouté (instructions, prompts, docs) à partir du plan du 7 octobre.
-- Prochain pas : T01.
+- Fait : T01 à T05 terminées (environnement, Git/GitHub, JavaScript, HTTP/JSON/API et bases de SQL).
+- Prochain pas : T06.
 
 ## Journal de Samad (le plus récent en haut)
 
