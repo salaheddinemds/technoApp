@@ -10,8 +10,8 @@
 
 ### Salah
 - En cours : rien
-- Dernière séance : 2026-10-08, T01 à T05 terminées
-- Prochain pas : T06
+- Dernière séance : 2026-10-09, T06 terminée
+- Prochain pas : T08
 - Bloquants : aucun
 
 ### Samad
@@ -33,10 +33,10 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 ## Journal de Salah (le plus récent en haut)
 
-### 2026-10-08
-- Fait : kit Copilot ajouté (instructions, prompts, docs) à partir du plan du 7 octobre.
-- Fait : T01 à T05 terminées (environnement, Git/GitHub, JavaScript, HTTP/JSON/API et bases de SQL).
-- Prochain pas : T06.
+### 2026-10-09
+- Fait : T06 terminée avec le cahier des charges et le schéma de la base dans `docs/Schéma_BDDtechnoApp.md`.
+- Prochain pas : T08, définir ensemble le contrat d'API.
+
 
 ## Journal de Samad (le plus récent en haut)
 

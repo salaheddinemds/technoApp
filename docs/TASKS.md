@@ -14,7 +14,7 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T03** Réviser HTML, CSS et JavaScript moderne (fetch, async/await, modules) en construisant une petite page — Les deux · 3 j · après : T01
 - [x] **T04** Comprendre HTTP, JSON et les API REST en testant une API publique avec Thunder Client — Les deux · 0,5 j · après : T03
 - [x] **T05** Apprendre les bases de SQL : SELECT, INSERT, JOIN, clés étrangères — Les deux · 1 j · après : T01
-- [ ] **T06** Rédiger le cahier des charges et dessiner le schéma de la base (tables et relations) — Salah · 1,5 j · après : T05
+- [x] **T06** Rédiger le cahier des charges et dessiner le schéma de la base (tables et relations) — Salah · 1,5 j · après : T05
 - [x] **T07** Dessiner les maquettes des pages client et admin (Figma ou papier) — Samad · 2 j · après : T04
 - [ ] **T08** Définir ensemble le contrat d'API : routes, paramètres, exemples de réponses JSON — Les deux · 0,5 j · après : T06, T07
 
