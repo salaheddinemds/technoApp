@@ -109,7 +109,7 @@ Le site doit se charger vite, rester sûr et s'utiliser aussi bien sur télépho
 | NF3 | Sécurité | Mots de passe hachés (bcrypt), connexion par jeton JWT, routes admin protégées, données validées par l'API, secrets hors de GitHub (fichier .env), HTTPS en ligne, limite de requêtes sur la connexion | Liste de contrôle T29 ; tentative d'accès admin sans jeton |
 | NF4 | Référencement | Titre et description propres à chaque page, adresses lisibles (slug), images allégées, sitemap.xml soumis à Google Search Console | T31, puis après la mise en ligne |
 | NF5 | Accessibilité de base | Texte alternatif sur les images, étiquette sur chaque champ de formulaire, contrastes lisibles, utilisation au clavier | Contrôle manuel, T32 |
-| NF6 | Langue | Interface en français, une seule langue au départ | À confirmer (section 8) |
+| NF6 | Langue | Interface en français, une seule langue au départ | D-010 |
 | NF7 | Volume | Conçu pour quelques centaines de produits ; 20 à 30 au départ | 30 produits d'essai (T13), puis les vrais produits (T37) |
 | NF8 | Maintenabilité | Code sur GitHub, une branche par tâche, relecture croisée, README, fichier .env.example, variables d'environnement documentées | Revue en T38 |
 | NF9 | Sauvegarde | Une sauvegarde manuelle de la base est essayée avant la mise en ligne | T33 |
@@ -269,7 +269,7 @@ Table centrale : chaque produit pointe vers une catégorie et une marque.
 | name | text | obligatoire | Nom affiché sur la carte et sur la fiche ; cherché par le mot-clé (C3) |
 | slug | text | obligatoire, unique (RG5) | Version du nom pour l'adresse de la fiche |
 | description | text | facultative | Présentation du produit sur la fiche ; cherchée par le mot-clé (C3) |
-| price | integer | obligatoire ; supérieur ou égal à 0, vérifié par l'API (RG6) | Prix en DA, sans centimes (à confirmer, section 8) |
+| price | integer | obligatoire ; supérieur ou égal à 0, vérifié par l'API (RG6) | Prix en DA, sans centimes (D-012) |
 | stock | integer | obligatoire ; supérieur ou égal à 0, vérifié par l'API (RG6) | Quantité en stock ; le produit est disponible si elle dépasse 0 (RG7) |
 | specs | jsonb | obligatoire, {} par défaut | Caractéristiques libres sous forme « nom : valeur », par exemple {"Écran": "6,5 pouces"} |
 | created\_at | timestamptz | obligatoire, remplie à l'ajout | Date d'ajout ; sert au tri « plus récents » et aux derniers produits de l'accueil (C1, C5) |
