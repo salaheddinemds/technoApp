@@ -17,10 +17,10 @@
 
 ## Propositions du kit (à valider ensemble)
 
-- **D-010** (à valider) Langue : code, noms de colonnes, routes et messages de commit en anglais ; interface, documentation et réponses de Copilot en français. Une seule langue d'interface au départ ; la version multilingue est dans « Plus tard ».
+- **D-010** (retenue) Langue : code, noms de colonnes, routes et messages de commit en anglais ; interface, documentation et réponses de Copilot en français. Une seule langue d'interface au départ ; la version multilingue est dans « Plus tard ».
 - **D-011** (à valider) Modules ES (`import`/`export`) dans le frontend et le backend.
-- **D-012** (à valider, T06) Prix : entier sans centimes, en dinars algériens (DA) par hypothèse. Disponible = `stock > 0`.
-- **D-013** (à valider, T08) Contrat d'API : formes de réponse (`data`, `meta`, `error`) et noms des paramètres de recherche, dans `API.md`.
+- **D-012** (retenue, T06) Prix : entier sans centimes, en dinars algériens (DA). Disponible = `stock > 0`.
+- **D-013** (retenue, T08) Contrat d'API : formes de réponse (`data`, `meta`, `error`), routes et noms des paramètres de recherche sont définis dans `API.md`.
 - **D-014** (ouverte, T25) Jeton JWT : envoyé dans l'en-tête `Authorization: Bearer`. Où le garder dans le navigateur : `localStorage` (simple, mais lisible par un script injecté) ou cookie `httpOnly` (plus sûr, mais demande des réglages CORS et une protection CSRF).
 - **D-015** (à valider, T21) Compte admin : créé par le script `prisma/seed.js` à partir de `ADMIN_EMAIL` et `ADMIN_PASSWORD` du fichier `.env` ; mot de passe haché avec bcrypt.
 - **D-016** (à valider, T16) Coordonnées de contact de la marque (téléphone, WhatsApp, e-mail) : constantes dans `frontend/src/config.js`, fournies par le client.
