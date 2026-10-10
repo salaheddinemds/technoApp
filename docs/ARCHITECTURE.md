@@ -49,7 +49,7 @@ catalogue-tech/
 
 ## Modèle de données
 
-Cinq tables, reliées par des clés étrangères. Le plan les décrit en français ; dans le code et la base, les noms sont en anglais (proposé, D-010).
+Cinq tables, reliées par des clés étrangères. Le plan les décrit en français ; dans le code et la base, les noms sont en anglais (D-010).
 
 | Table | Colonnes | Liens |
 |---|---|---|

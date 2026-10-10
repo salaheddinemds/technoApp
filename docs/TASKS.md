@@ -16,11 +16,11 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T05** Apprendre les bases de SQL : SELECT, INSERT, JOIN, clés étrangères — Les deux · 1 j · après : T01
 - [x] **T06** Rédiger le cahier des charges et dessiner le schéma de la base (tables et relations) — Salah · 1,5 j · après : T05
 - [x] **T07** Dessiner les maquettes des pages client et admin (Figma ou papier) — Samad · 2 j · après : T04
-- [ ] **T08** Définir ensemble le contrat d'API : routes, paramètres, exemples de réponses JSON — Les deux · 0,5 j · après : T06, T07
+- [x] **T08** Définir ensemble le contrat d'API : routes, paramètres, exemples de réponses JSON — Les deux · 0,5 j · après : T06, T07
 
 ## Phase 1 — Fondations techniques (Salah 3 j · Samad 4 j)
 
-- [ ] **T09** Backend : initialiser Express, organiser les dossiers, variables d'environnement, route de test — Salah · 1 j · après : T08
+- [x] **T09** Backend : initialiser Express, organiser les dossiers, variables d'environnement, route de test — Salah · 1 j · après : T08
 - [ ] **T10** Base de données : créer PostgreSQL (local puis Neon), schéma Prisma, migrations — Salah · 2 j · après : T06, T09
 - [ ] **T11** Frontend : initialiser React, Vite, Tailwind et React Router ; mise en page commune (en-tête, pied de page) — Samad · 2 j · après : T07
 - [ ] **T12** Frontend : composants réutilisables (carte produit, boutons, champs, chargement) avec données fictives — Samad · 1 j · après : T11
