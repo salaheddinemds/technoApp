@@ -15,24 +15,19 @@
 - Bloquants : aucun
 
 ### Samad
-- En cours : T11, frontend initialisé ; PR et fusion à faire
-- Dernière séance : 2026-10-10, T11 en cours
-- Prochain pas : relire le frontend, puis ouvrir la PR T11
-- Bloquants : revue et fusion de T11 en attente
+- En cours : rien
+- Dernière séance : 2026-10-11, T11 terminée et fusionnée dans `main`
+- Prochain pas : T12
+- Bloquants : aucun
 
 ## À retenir (10 lignes au maximum)
 
 Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 - Dépôt GitHub : à compléter (T01)
-<<<<<<< HEAD
-- Lancer l'API : à compléter (T09)
 - Lancer le frontend : `cd frontend` puis `npm run dev` (http://localhost:5173)
 - Vérifier le frontend : depuis `frontend/`, `npm run lint` et `npm run build`
-=======
-- Lancer l'API : `cd backend`, puis `npm install` et `npm run dev` (T09)
-- Lancer le frontend : à compléter (T11)
->>>>>>> main
+- Lancer l'API : depuis `backend/`, `npm install` puis `npm run dev` (T09)
 - Base de données locale : à compléter (T10)
 - Adresses en ligne (frontend, API) : à compléter (phase 5)
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
@@ -56,4 +51,8 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Fait : initialisé React avec Vite, ajouté Tailwind et React Router, et créé la mise en page commune avec l'accueil et le catalogue.
 - Appris : Tailwind s'intègre à Vite par son plugin ; React Router associe les URL aux pages.
 - Vérifié : `npm run lint`, `npm run build` et réponses HTTP 200 sur `/` et `/produits`.
-- Prochain pas : relire les changements et ouvrir la PR T11 pour revue et fusion.
+- Prochain pas : T12, créer les composants réutilisables avec des données fictives.
+
+### 2026-10-11
+- Fait : T11 fusionnée dans `main`.
+- Prochain pas : T12.
