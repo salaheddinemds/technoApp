@@ -50,6 +50,12 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Sécurité : `.env.example` contient uniquement des valeurs fictives ; les secrets restent dans `.env`.
 - Prochain pas : appliquer et tester la migration, puis faire relire et fusionner T10.
 
+### 2026-10-12
+- Fait : migration initiale appliquée sur Neon et vérifiée avec `db:status` et `db:deploy`.
+- Vérifié : `db:validate` et `db:generate` réussissent depuis `backend/`.
+- Expliqué : Prisma Studio peut être lancé avec `npx prisma studio` pour consulter et saisir des données de test.
+- Prochain pas : ouvrir la PR T10 et la faire relire avant fusion.
+
 
 ## Journal de Samad (le plus récent en haut)
 
