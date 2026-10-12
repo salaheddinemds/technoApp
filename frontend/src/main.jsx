@@ -3,42 +3,26 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
+import CatalogPage from './pages/client/CatalogPage.jsx'
+import HomePage from './pages/client/HomePage.jsx'
+import ProductDetailPage from './pages/client/ProductDetailPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route element={<App />}>
-          <Route
-            index
-            element={
-              <section className="py-12 text-center">
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-                  Bienvenue sur technoApp
-                </h1>
-                <p className="mt-3 text-slate-600">
-                  Votre catalogue de produits tech.
-                </p>
-              </section>
-            }
-          />
-          <Route
-            path="produits"
-            element={
-              <h1 className="text-2xl font-bold text-slate-900">Catalogue</h1>
-            }
-          />
+          <Route index element={<HomePage />} />
+          <Route path="produits" element={<CatalogPage />} />
+          <Route path="produits/:slug" element={<ProductDetailPage />} />
+          <Route path="contact" element={<HomePage />} />
           <Route
             path="*"
             element={
-              <section className="py-12 text-center">
-                <h1 className="text-2xl font-bold text-slate-900">
-                  Page introuvable
-                </h1>
-                <p className="mt-3 text-slate-600">
-                  Cette page n’existe pas.
-                </p>
-              </section>
+              <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-10 text-center">
+                <h1 className="text-5xl font-black uppercase text-[#ef3b2d]">404</h1>
+                <p className="mt-4 text-2xl font-bold text-[#1b1b1b]">Oups, cette page n’existe pas</p>
+              </div>
             }
           />
         </Route>
