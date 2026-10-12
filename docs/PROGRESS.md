@@ -9,9 +9,9 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : rien
-- Dernière séance : 2026-10-10, T09 terminée
-- Prochain pas : T10
+- En cours : T10, migration initiale appliquée et vérifiée sur Neon
+- Dernière séance : 2026-10-12, `db:status`, `db:deploy`, `db:validate` et `db:generate` réussis
+- Prochain pas : ouvrir la PR T10 et la faire relire avant fusion
 - Bloquants : aucun
 
 ### Samad
@@ -43,6 +43,12 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Fait : T09 terminée ; backend Express initialisé dans `backend/`, configuration d'environnement, dossiers de base et route `/api/health` ajoutés.
 - Appris : une configuration centralisée et des réponses JSON d'erreur uniformes facilitent le démarrage et les tests de l'API.
 - Prochain pas : T10, créer le schéma Prisma et les migrations.
+
+### 2026-10-11
+- Fait : schéma Prisma et migration initiale T10 ajoutés pour les catégories, marques, produits, images et administrateurs.
+- Vérifié : `npm run db:validate` réussit depuis `backend/`.
+- Sécurité : `.env.example` contient uniquement des valeurs fictives ; les secrets restent dans `.env`.
+- Prochain pas : appliquer et tester la migration, puis faire relire et fusionner T10.
 
 
 ## Journal de Samad (le plus récent en haut)
