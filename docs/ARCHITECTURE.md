@@ -47,6 +47,8 @@ catalogue-tech/
    └─ src/           routes, controllers, middleware, lib, utils
 ```
 
+Depuis `backend/`, lancez `npm run db:seed` pour créer ou mettre à jour les catégories, marques et produits de démonstration. Le script utilise des images provisoires `placehold.co`, est relançable sans doublons et refuse les connexions dont l’hôte est celui de Neon.
+
 ## Modèle de données
 
 Cinq tables, reliées par des clés étrangères. Le plan les décrit en français ; dans le code et la base, les noms sont en anglais (D-010).
