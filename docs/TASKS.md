@@ -24,7 +24,7 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T10** Base de données : créer PostgreSQL (local puis Neon), schéma Prisma, migrations — Salah · 2 j · après : T06, T09
 - [x] **T11** Frontend : initialiser React, Vite, Tailwind et React Router ; mise en page commune (en-tête, pied de page) — Samad · 2 j · après : T07
 - [x] **T12** Frontend : composants réutilisables (carte produit, boutons, champs, chargement) avec données fictives — Samad · 1 j · après : T11
-- [ ] **T13** Préparer un jeu de données réaliste (marques, catégories, 30 produits) et l'importer avec un script — Samad · 1 j · après : T10
+- [x] **T13** Préparer un jeu de données réaliste (marques, catégories, 30 produits) et l'importer avec un script — Samad · 1 j · après : T10
 
 ## Phase 2 — Espace client (Salah 7 j · Samad 8,5 j)
 
