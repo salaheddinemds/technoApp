@@ -9,9 +9,9 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T10, migration initiale appliquée et vérifiée sur Neon
-- Dernière séance : 2026-10-12, `db:status`, `db:deploy`, `db:validate` et `db:generate` réussis
-- Prochain pas : ouvrir la PR T10 et la faire relire avant fusion
+- En cours : T14, routes publiques de lecture (catégories, marques, produits, détail) implémentées
+- Dernière séance : 2026-10-17, T14 vérifiée en local (PostgreSQL) avec seed et contrôles des routes publiques
+- Prochain pas : ouvrir la PR T14 et la faire relire avant fusion
 - Bloquants : aucun
 
 ### Samad
@@ -33,6 +33,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
 
 ## Journal de Salah (le plus récent en haut)
+
+### 2026-10-17
+- Fait : T14 implémentée côté backend avec les routes `GET /api/categories`, `GET /api/brands`, `GET /api/products` et `GET /api/products/:slug`.
+- Fait : validation des paramètres de la liste produits (pagination, tri et filtres) et réponses d'erreur alignées avec `docs/API.md`.
+- Vérifié : tests en local sur PostgreSQL avec `db:deploy`, `db:seed`, puis contrôles manuels de `/api/health` et `/api/categories`.
+- Sécurité : retour de `DATABASE_URL` vers Neon après les tests locaux ; seed utilisé uniquement sur la base locale.
+- Prochain pas : commit de T14, ouverture de la PR et relecture avant fusion.
 
 ### 2026-10-09
 - Fait : T06 terminée avec le cahier des charges et le schéma de la base dans `docs/Schéma_BDDtechnoApp.md`.
