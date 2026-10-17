@@ -10,10 +10,11 @@ export function notFoundHandler(_request, response) {
 export function errorHandler(error, _request, response, _next) {
   console.error(error);
 
-  response.status(500).json({
+  response.status(error.statusCode ?? 500).json({
     error: {
-      code: 'SERVER_ERROR',
-      message: 'Une erreur inattendue est survenue.'
+      code: error.code ?? 'SERVER_ERROR',
+      message: error.statusCode ? error.message : 'Une erreur inattendue est survenue.',
+      ...(error.details ? { details: error.details } : {})
     }
   });
 }
