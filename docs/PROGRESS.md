@@ -9,9 +9,9 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T14, routes publiques de lecture (catégories, marques, produits, détail) implémentées
-- Dernière séance : 2026-10-17, T14 vérifiée en local (PostgreSQL) avec seed et contrôles des routes publiques
-- Prochain pas : ouvrir la PR T14 et la faire relire avant fusion
+- En cours : T15, recherche, filtres, tri et pagination de la liste publique implémentés et vérifiés
+- Dernière séance : 2026-10-19, T15 testée en local avec 30 produits et contrôles des requêtes de recherche, filtres, tri et pagination
+- Prochain pas : committer T14/T15, ouvrir la PR et demander la relecture avant fusion
 - Bloquants : aucun
 
 ### Samad
@@ -40,6 +40,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Vérifié : tests en local sur PostgreSQL avec `db:deploy`, `db:seed`, puis contrôles manuels de `/api/health` et `/api/categories`.
 - Sécurité : retour de `DATABASE_URL` vers Neon après les tests locaux ; seed utilisé uniquement sur la base locale.
 - Prochain pas : commit de T14, ouverture de la PR et relecture avant fusion.
+
+### 2026-10-19
+- Fait : T15 vérifiée avec la recherche par mot-clé, les filtres de catégorie, marque, prix et disponibilité, le tri et la pagination.
+- Fait : validation renforcée des paramètres de query ; les valeurs répétées ou invalides renvoient `400 VALIDATION_ERROR`.
+- Vérifié : API locale avec 30 produits ; recherche `cartable`, filtre `scolaire`, `inStock=true`, tri `price_asc` et pagination `page=2&limit=5`.
+- Important : `backend/.env` utilise la base PostgreSQL locale et ne doit pas être commité ; le seed refuse Neon.
+- Prochain pas : committer uniquement le code et `docs/TASKS.md`, pousser la branche, puis ouvrir la PR pour relecture.
 
 ### 2026-10-09
 - Fait : T06 terminée avec le cahier des charges et le schéma de la base dans `docs/Schéma_BDDtechnoApp.md`.
