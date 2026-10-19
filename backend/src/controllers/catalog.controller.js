@@ -82,13 +82,17 @@ function getSingleQueryValue(query, name) {
     throw validationError(`Le paramètre « ${name} » ne peut apparaître qu'une seule fois.`);
   }
 
+  if (value !== undefined && typeof value !== 'string') {
+    throw validationError(`Le paramètre « ${name} » doit être une valeur texte.`);
+  }
+
   return value;
 }
 
 function parseIntegerQuery(query, name, { min, max } = {}) {
   const value = getSingleQueryValue(query, name);
 
-  if (value === undefined || value === '') {
+  if (value === undefined) {
     return undefined;
   }
 

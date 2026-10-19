@@ -28,8 +28,8 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 
 ## Phase 2 — Espace client (Salah 7 j · Samad 8,5 j)
 
-- [ ] **T14** API : lire les catégories, marques et produits (liste et détail d'un produit) — Salah · 2 j · après : T10
-- [ ] **T15** API : recherche par mot-clé, filtres (catégorie, marque, prix, disponibilité), tri et pagination — Salah · 3 j · après : T14
+- [x] **T14** API : lire les catégories, marques et produits (liste et détail d'un produit) — Salah · 2 j · après : T10
+- [x] **T15** API : recherche par mot-clé, filtres (catégorie, marque, prix, disponibilité), tri et pagination — Salah · 3 j · après : T14
 - [ ] **T16** Page détail produit : galerie photo, description, caractéristiques, bouton de contact — Salah · 2 j · après : T12, T14
 - [ ] **T17** Brancher le frontend sur l'API : appels, chargement, erreurs — Samad · 1 j · après : T14, T13
 - [ ] **T18** Page d'accueil : bannière, catégories, derniers produits — Samad · 2 j · après : T12, T17
