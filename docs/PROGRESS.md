@@ -9,9 +9,9 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T15, recherche, filtres, tri et pagination de la liste publique implémentés et vérifiés
-- Dernière séance : 2026-10-19, T15 testée en local avec 30 produits et contrôles des requêtes de recherche, filtres, tri et pagination
-- Prochain pas : committer T14/T15, ouvrir la PR et demander la relecture avant fusion
+- En cours : T16 terminée localement ; commit et pull request restent à faire avant fusion
+- Dernière séance : 2026-10-20, page détail branchée sur l'API et vérifiée avec galerie, description, caractéristiques et boutons de contact
+- Prochain pas : committer T16, pousser la branche et demander la relecture avant fusion dans `main`
 - Bloquants : aucun
 
 ### Samad
@@ -33,6 +33,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
 
 ## Journal de Salah (le plus récent en haut)
+
+### 2026-10-20
+- Fait : T16 implémentée avec l'appel `GET /api/products/:slug`, les états de chargement et d'erreur, la galerie photo, la description et les caractéristiques.
+- Fait : boutons de contact Appeler et WhatsApp ajoutés sur la fiche produit.
+- Corrigé : proxy Vite local ajouté pour relayer `/api` vers l'API Express sur le port 3000.
+- Vérifié : `npm run lint`, `npm run build`, `git diff --check` et ouverture d'une fiche réelle avec le slug du seed.
+- Prochain pas : commit, push et pull request pour relecture avant fusion.
 
 ### 2026-10-17
 - Fait : T14 implémentée côté backend avec les routes `GET /api/categories`, `GET /api/brands`, `GET /api/products` et `GET /api/products/:slug`.

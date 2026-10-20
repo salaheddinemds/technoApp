@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ProductCard from '../../components/ProductCard'
 import Button from '../../components/ui/Button'
-import { mockProducts } from '../../data/mockProducts'
+import LoadingState from '../../components/ui/LoadingState'
+import { getProductBySlug } from '../../services/api'
 
 function formatPrice(value) {
   return new Intl.NumberFormat('fr-DZ', {
@@ -13,7 +14,48 @@ function formatPrice(value) {
 
 export default function ProductDetailPage() {
   const { slug } = useParams()
-  const product = mockProducts.find((item) => item.slug === slug)
+  const [result, setResult] = useState({ slug: null, product: null, error: null })
+  const [selectedImage, setSelectedImage] = useState(null)
+  const product = result.slug === slug ? result.product : null
+  const error = result.slug === slug ? result.error : null
+  const isLoading = result.slug !== slug
+
+  useEffect(() => {
+    let isCurrent = true
+
+    getProductBySlug(slug)
+      .then((data) => {
+        if (isCurrent) {
+          setResult({ slug, product: data, error: null })
+          setSelectedImage(data.images[0] ?? null)
+        }
+      })
+      .catch((requestError) => {
+        if (isCurrent) {
+          setResult({ slug, product: null, error: requestError })
+        }
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [slug])
+
+  if (isLoading) {
+    return <LoadingState message="Chargement du produit..." />
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-10 text-center">
+        <h1 className="text-2xl font-black uppercase text-[#c52e20]">Produit indisponible</h1>
+        <p className="mt-3 text-[#5b2a25]">{error.message}</p>
+        <Link to="/produits" className="mt-6 inline-flex rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white">
+          Voir les produits
+        </Link>
+      </div>
+    )
+  }
 
   if (!product) {
     return (
@@ -28,18 +70,32 @@ export default function ProductDetailPage() {
     )
   }
 
+  const image = selectedImage ?? product.images[0]
+  const contactMessage = encodeURIComponent(`Bonjour, je souhaite obtenir des informations sur ${product.name}.`)
+
   return (
     <div className="space-y-8">
       <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f3efe9] p-6">
         <div className="mb-4 text-sm text-[#4d4d4d]">Accueil · {product.category.name} · {product.name}</div>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-[14px] border border-[#d7d0c5] bg-[#eae3da] p-4">
-            <img src={product.image} alt={product.name} className="h-105 w-full rounded-xl object-cover" />
-            <div className="mt-5 flex gap-3">
-              {[1, 2, 3, 4, 5].map((item) => (
-                <div key={item} className="flex h-14 w-14 items-center justify-center rounded-md border border-[#d7d0c5] bg-[#f0ece7] text-xs font-medium text-[#2a2a2a]">
-                  {item}
-                </div>
+            {image ? (
+              <img src={image.url} alt={product.name} className="h-[420px] w-full rounded-xl object-cover" />
+            ) : (
+              <div className="flex h-[420px] items-center justify-center rounded-xl bg-[#dfd7cf] text-sm text-[#5d5d5d]">
+                Aucune photo disponible
+              </div>
+            )}
+            <div className="mt-5 flex flex-wrap gap-3">
+              {product.images.map((productImage) => (
+                <button
+                  key={productImage.id}
+                  type="button"
+                  onClick={() => setSelectedImage(productImage)}
+                  className={`h-14 w-14 overflow-hidden rounded-md border-2 bg-[#f0ece7] ${selectedImage?.id === productImage.id ? 'border-[#ef3b2d]' : 'border-[#d7d0c5]'}`}
+                >
+                  <img src={productImage.url} alt="" className="h-full w-full object-cover" />
+                </button>
               ))}
             </div>
           </div>
@@ -60,30 +116,38 @@ export default function ProductDetailPage() {
               {product.inStock ? 'En stock' : 'Rupture de stock'}
             </div>
 
+            {product.description && (
+              <div className="mt-6 rounded-xl border border-[#d7d0c5] bg-white p-4 text-sm leading-6 text-[#2a2a2a]">
+                <div className="mb-2 text-lg font-black uppercase text-[#1c1c1c]">Description</div>
+                <p>{product.description}</p>
+              </div>
+            )}
+
             <div className="mt-6 rounded-xl border border-[#d7d0c5] bg-white p-4 text-sm text-[#2a2a2a]">
               <div className="mb-3 text-lg font-black uppercase text-[#1c1c1c]">Caractéristiques</div>
               <div className="grid gap-2">
-                <div className="flex items-center justify-between border-b border-[#ece7e1] pb-2"><span>Marque</span><span>{product.brand.name}</span></div>
-                <div className="flex items-center justify-between border-b border-[#ece7e1] pb-2"><span>Catégorie</span><span>{product.category.name}</span></div>
-                <div className="flex items-center justify-between"><span>Garantie</span><span>12 mois</span></div>
+                {Object.entries(product.specs ?? {}).map(([name, value]) => (
+                  <div key={name} className="flex items-center justify-between gap-4 border-b border-[#ece7e1] pb-2 last:border-0">
+                    <span>{name}</span>
+                    <span className="text-right font-medium">{String(value)}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button>Appeler</Button>
-              <Button variant="tertiary">WhatsApp</Button>
+              <a href="tel:+213550070708"><Button>Appeler</Button></a>
+              <a href={`https://wa.me/213550070708?text=${contactMessage}`} target="_blank" rel="noreferrer">
+                <Button variant="tertiary">WhatsApp</Button>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-6">
-        <h2 className="mb-5 text-3xl font-black uppercase text-[#1c1c1c]">Produits similaires</h2>
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {mockProducts.slice(0, 4).map((item) => (
-            <ProductCard key={item.id} product={item} tag="Nouveau" />
-          ))}
-        </div>
+        <h2 className="mb-5 text-3xl font-black uppercase text-[#1c1c1c]">Besoin d’aide ?</h2>
+        <p className="text-sm text-[#4d4d4d]">Contactez-nous pour connaître la disponibilité et les conditions de livraison de ce produit.</p>
       </div>
     </div>
   )
