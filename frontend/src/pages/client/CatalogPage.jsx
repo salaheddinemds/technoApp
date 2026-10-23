@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import ProductCard from '../../components/ProductCard'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
-import { mockBrands, mockCategories, mockProducts } from '../../data/mockProducts'
+import LoadingState from '../../components/ui/LoadingState'
+import { getBrands, getCategories, getProducts } from '../../services/api'
 
 export default function CatalogPage() {
   const [search, _setSearch] = useState('')
@@ -10,9 +11,35 @@ export default function CatalogPage() {
   const [selectedBrand, setSelectedBrand] = useState('all')
   const [inStockOnly, setInStockOnly] = useState(false)
   const [sortBy, setSortBy] = useState('price_desc')
+  const [result, setResult] = useState({ status: 'loading', products: [], categories: [], brands: [], error: null })
+  const [retryCount, setRetryCount] = useState(0)
+
+  useEffect(() => {
+    let isCurrent = true
+
+    Promise.all([
+      getProducts({ limit: 50 }),
+      getCategories(),
+      getBrands(),
+    ])
+      .then(([{ products }, categories, brands]) => {
+        if (isCurrent) {
+          setResult({ status: 'success', products, categories, brands, error: null })
+        }
+      })
+      .catch((error) => {
+        if (isCurrent) {
+          setResult({ status: 'error', products: [], categories: [], brands: [], error })
+        }
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [retryCount])
 
   const filteredProducts = useMemo(() => {
-    const items = mockProducts.filter((product) => {
+    const items = result.products.filter((product) => {
       const matchesSearch =
         !search ||
         product.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -32,7 +59,30 @@ export default function CatalogPage() {
       if (sortBy === 'name') return a.name.localeCompare(b.name)
       return b.id - a.id
     })
-  }, [inStockOnly, search, selectedBrand, selectedCategory, sortBy])
+  }, [inStockOnly, result.products, search, selectedBrand, selectedCategory, sortBy])
+
+  if (result.status === 'loading') {
+    return <LoadingState message="Chargement des produits..." />
+  }
+
+  if (result.status === 'error') {
+    return (
+      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-8 text-center">
+        <h1 className="text-2xl font-black uppercase text-[#c52e20]">Impossible de charger le catalogue</h1>
+        <p className="mt-3 text-[#5b2a25]">{result.error.message}</p>
+        <button
+          type="button"
+          onClick={() => {
+            setResult((current) => ({ ...current, status: 'loading' }))
+            setRetryCount((count) => count + 1)
+          }}
+          className="mt-5 rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white"
+        >
+          Réessayer
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6 py-2">
@@ -60,7 +110,7 @@ export default function CatalogPage() {
             <div className="mt-5 space-y-4">
               <div>
                 <div className="mb-2 text-sm font-bold uppercase text-[#1f1f1f]">Catégorie</div>
-                {mockCategories.map((item) => (
+                {result.categories.map((item) => (
                   <label key={item.slug} className="mb-2 flex items-center gap-2 text-sm text-[#2b2b2b]">
                     <input
                       type="checkbox"
@@ -74,7 +124,7 @@ export default function CatalogPage() {
 
               <div>
                 <div className="mb-2 text-sm font-bold uppercase text-[#1f1f1f]">Marque</div>
-                {mockBrands.map((item) => (
+                {result.brands.map((item) => (
                   <label key={item.slug} className="mb-2 flex items-center gap-2 text-sm text-[#2b2b2b]">
                     <input
                       type="checkbox"
@@ -126,11 +176,17 @@ export default function CatalogPage() {
               </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} tag={product.inStock ? 'Nouveau' : 'Promo'} />
-              ))}
-            </div>
+            {filteredProducts.length > 0 ? (
+              <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} tag={product.inStock ? 'Nouveau' : 'Promo'} />
+                ))}
+              </div>
+            ) : (
+              <p className="rounded-xl bg-white p-8 text-center text-sm text-[#4d4d4d]">
+                Aucun produit ne correspond à votre sélection.
+              </p>
+            )}
           </div>
         </div>
       </div>

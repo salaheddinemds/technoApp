@@ -18,11 +18,13 @@ export default function ProductCard({ product, tag = 'Nouveau' }) {
         <div className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-md bg-white/85 text-sm text-[#202020]">
           🖼️
         </div>
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-40 w-full object-cover"
-        />
+        {product.image ? (
+          <img src={product.image} alt={product.name} className="h-40 w-full object-cover" />
+        ) : (
+          <div className="flex h-40 items-center justify-center text-sm text-[#5d5d5d]">
+            Aucune photo disponible
+          </div>
+        )}
       </div>
 
       <div className="mt-4 text-left">
