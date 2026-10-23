@@ -1,10 +1,59 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProductCard from '../../components/ProductCard'
 import Button from '../../components/ui/Button'
-import { mockCategories, mockProducts } from '../../data/mockProducts'
+import LoadingState from '../../components/ui/LoadingState'
+import { getCategories, getProducts } from '../../services/api'
 
 export default function HomePage() {
-  const featuredProducts = mockProducts.slice(0, 4)
+  const [result, setResult] = useState({ status: 'loading', categories: [], products: [], error: null })
+  const [retryCount, setRetryCount] = useState(0)
+
+  useEffect(() => {
+    let isCurrent = true
+
+    Promise.all([
+      getCategories(),
+      getProducts({ limit: 4, sort: 'newest' }),
+    ])
+      .then(([categories, { products }]) => {
+        if (isCurrent) {
+          setResult({ status: 'success', categories, products, error: null })
+        }
+      })
+      .catch((error) => {
+        if (isCurrent) {
+          setResult({ status: 'error', categories: [], products: [], error })
+        }
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [retryCount])
+
+  if (result.status === 'loading') {
+    return <LoadingState message="Chargement de l’accueil..." />
+  }
+
+  if (result.status === 'error') {
+    return (
+      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-8 text-center">
+        <h1 className="text-2xl font-black uppercase text-[#c52e20]">Impossible de charger l’accueil</h1>
+        <p className="mt-3 text-[#5b2a25]">{result.error.message}</p>
+        <button
+          type="button"
+          onClick={() => {
+            setResult((current) => ({ ...current, status: 'loading' }))
+            setRetryCount((count) => count + 1)
+          }}
+          className="mt-5 rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white"
+        >
+          Réessayer
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8 py-2">
@@ -66,14 +115,17 @@ export default function HomePage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {mockCategories.map((category) => (
+          {result.categories.map((category) => (
             <div key={category.slug} className="rounded-[14px] border border-[#d7d0c5] bg-[#f5f2ee] p-4 shadow-sm">
               <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#ef3b2d] text-lg text-white">▣</div>
               <h3 className="mt-4 text-lg font-black uppercase text-[#1c1c1c]">{category.name}</h3>
-              <p className="mt-2 text-sm text-[#4d4d4d]">{mockProducts.filter((item) => item.category.slug === category.slug).length} produits</p>
+              <p className="mt-2 text-sm text-[#4d4d4d]">{category.productCount} produits</p>
             </div>
           ))}
         </div>
+        {result.categories.length === 0 && (
+          <p className="rounded-xl bg-white p-6 text-sm text-[#4d4d4d]">Aucune catégorie disponible pour le moment.</p>
+        )}
       </section>
 
       <section className="pt-2">
@@ -85,10 +137,13 @@ export default function HomePage() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {featuredProducts.map((product) => (
+          {result.products.map((product) => (
             <ProductCard key={product.id} product={product} tag="Nouveau" />
           ))}
         </div>
+        {result.products.length === 0 && (
+          <p className="rounded-xl bg-white p-6 text-sm text-[#4d4d4d]">Aucun produit disponible pour le moment.</p>
+        )}
       </section>
 
       <section className="mt-8 rounded-[16px] bg-[#ec3b2a] px-6 py-5 text-white">
