@@ -5,20 +5,20 @@
 
 ## État actuel
 
-- Phase en cours : 1 · Fondations techniques (semaines 2 à 3)
+- Phase en cours : 2 · Espace client (semaines 3 à 5)
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T16 terminée localement ; commit et pull request restent à faire avant fusion
+- En cours : aucune ; T16 est terminée et fusionnée dans `main` via la PR #15
 - Dernière séance : 2026-10-20, page détail branchée sur l'API et vérifiée avec galerie, description, caractéristiques et boutons de contact
-- Prochain pas : committer T16, pousser la branche et demander la relecture avant fusion dans `main`
-- Bloquants : aucun
+- Prochain pas : commencer T25 après la fin de T21, dont Samad est responsable
+- Bloquants : T25 dépend de T21
 
 ### Samad
-- En cours : T13, préparer un jeu de données réaliste et l'importer avec un script
-- Dernière séance : 2026-10-15, T13 vérifiée en local ; seed exécuté deux fois sans doublons
-- Prochain pas : demander à Salah de relire T13, puis pousser et fusionner avant de cocher la tâche
-- Bloquants : relecture et fusion en attente ; le seed refuse les bases Neon
+- En cours : T18 terminée localement ; commit, relecture et fusion restent à faire avant de cocher la tâche
+- Dernière séance : 2026-10-25, accueil restylé selon la maquette ; éléments communs, catalogue et contact également restylés sans modifier les appels API ni les états
+- Prochain pas : committer et faire fusionner T18 ; ensuite, terminer T19, notamment recherche et pagination synchronisée avec l'URL
+- Bloquants : aucun
 
 ## À retenir (10 lignes au maximum)
 
@@ -79,6 +79,18 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 
 ## Journal de Samad (le plus récent en haut)
+
+### 2026-10-25
+- Fait : accueil T18 terminé localement avec bannière, catégories, derniers produits et appel à l'action ; design aligné sur les maquettes.
+- Fait : éléments communs, catalogue et contact restylés ; fiche produit de Salah non modifiée.
+- Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussis après chaque étape de la refonte.
+- À faire : commit, relecture et fusion avant de cocher T18 ; T19 reste à compléter, notamment recherche et pagination avec état dans l'URL.
+- Note : les maquettes mobiles citées dans le README sont absentes ; T20 responsive détaillée reste à traiter lorsque ces maquettes seront disponibles.
+
+### 2026-10-23
+- Fait : T17 fusionnée dans `main` via la PR #16 ; l'accueil et le catalogue chargent les catégories et les produits depuis l'API.
+- Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussis depuis `frontend/`.
+- Prochain pas : T18, compléter la page d'accueil avec les catégories et les derniers produits.
 
 ### 2026-10-15
 - Vérifié : T13 fonctionne sur PostgreSQL local ; le seed exécuté deux fois laisse 8 catégories, 2 marques, 30 produits et 30 images, sans doublons.
