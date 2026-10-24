@@ -67,16 +67,16 @@ export default function CatalogPage() {
 
   if (result.status === 'error') {
     return (
-      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-8 text-center">
-        <h1 className="text-2xl font-black uppercase text-[#c52e20]">Impossible de charger le catalogue</h1>
-        <p className="mt-3 text-[#5b2a25]">{result.error.message}</p>
+      <div className="rounded-2xl border border-[#E6E1D8] bg-white p-8 text-center shadow-sm">
+        <h1 className="text-2xl font-extrabold text-[#C8141B]">Impossible de charger le catalogue</h1>
+        <p className="mt-3 text-[#5B5B5B]">{result.error.message}</p>
         <button
           type="button"
           onClick={() => {
             setResult((current) => ({ ...current, status: 'loading' }))
             setRetryCount((count) => count + 1)
           }}
-          className="mt-5 rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white"
+          className="design-button mt-5 min-h-[46px] rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-5 py-3 text-sm font-bold uppercase text-white"
         >
           Réessayer
         </button>
@@ -85,88 +85,103 @@ export default function CatalogPage() {
   }
 
   return (
-    <div className="space-y-6 py-2">
-      <div className="rounded-[18px] bg-gradient-to-r from-[#e2261d] via-[#ea4a2d] to-[#f59a5a] p-5 text-white">
-        <div className="mb-2 text-sm font-medium uppercase tracking-[0.12em] text-white/80">Accueil · Tous les produits</div>
-        <h1 className="text-4xl font-black uppercase tracking-[-0.05em] text-white">Tous les produits</h1>
+    <div className="design-rise space-y-8 py-2">
+      <div className="design-gradient-shift relative isolate overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8141B] via-[#D71920] to-[#F0561E] p-6 text-white shadow-sm sm:p-8">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-14 h-60 w-60 rounded-full bg-white/15" />
+        <div className="relative">
+          <div className="mb-2 text-sm text-white/80">Accueil · Tous les produits</div>
+          <h1 className="text-3xl font-extrabold text-white sm:text-4xl">Tous les produits</h1>
+        </div>
       </div>
 
-      <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f3efe9] p-4">
+      <div className="rounded-2xl border border-[#E6E1D8] bg-white p-4 shadow-sm sm:p-5">
         <div className="mb-4 flex flex-wrap items-center gap-3">
           {['Nouveau', 'Promo', 'En stock'].map((tag) => (
             <span
               key={tag}
-              className="inline-flex rounded-full border border-[#d7d0c5] bg-white px-2.5 py-1 text-[10px] font-black uppercase text-[#1c1c1c]"
+              className="inline-flex rounded-full border border-[#E6E1D8] bg-[#F7F5F0] px-3 py-1.5 text-[11px] font-bold uppercase text-[#5B5B5B]"
             >
               {tag}
             </span>
           ))}
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-[280px_1fr]">
-          <aside className="rounded-[14px] border border-[#d7d0c5] bg-[#f5f2ee] p-4">
-            <h2 className="text-2xl font-black uppercase text-[#1f1f1f]">Filtres</h2>
+        <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
+          <aside className="h-fit rounded-2xl border border-[#E6E1D8] bg-white p-5 shadow-sm">
+            <div className="flex items-center gap-3 border-b border-[#E6E1D8] pb-4">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F0561E] to-[#D71920] text-white">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                  <path d="M3 4h18l-7 9v6l-4 2v-8z" />
+                </svg>
+              </span>
+              <h2 className="flex-1 text-xl font-extrabold text-[#111111]">Filtres</h2>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#5B5B5B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <path d="M6 6l12 12M18 6 6 18" />
+              </svg>
+            </div>
 
-            <div className="mt-5 space-y-4">
-              <div>
-                <div className="mb-2 text-sm font-bold uppercase text-[#1f1f1f]">Catégorie</div>
+            <div className="mt-5 space-y-6">
+              <div className="flex flex-col gap-2">
+                <div className="text-sm font-bold text-[#111111]">Catégorie</div>
                 {result.categories.map((item) => (
-                  <label key={item.slug} className="mb-2 flex items-center gap-2 text-sm text-[#2b2b2b]">
+                  <label key={item.slug} className="flex items-center gap-2 text-sm text-[#5B5B5B]">
                     <input
                       type="checkbox"
                       checked={selectedCategory === item.slug}
                       onChange={() => setSelectedCategory(selectedCategory === item.slug ? 'all' : item.slug)}
+                      className="h-4 w-4 accent-[#D71920]"
                     />
                     {item.name}
                   </label>
                 ))}
               </div>
 
-              <div>
-                <div className="mb-2 text-sm font-bold uppercase text-[#1f1f1f]">Marque</div>
+              <div className="flex flex-col gap-2">
+                <div className="text-sm font-bold text-[#111111]">Marque</div>
                 {result.brands.map((item) => (
-                  <label key={item.slug} className="mb-2 flex items-center gap-2 text-sm text-[#2b2b2b]">
+                  <label key={item.slug} className="flex items-center gap-2 text-sm text-[#5B5B5B]">
                     <input
                       type="checkbox"
                       checked={selectedBrand === item.slug}
                       onChange={() => setSelectedBrand(selectedBrand === item.slug ? 'all' : item.slug)}
+                      className="h-4 w-4 accent-[#D71920]"
                     />
                     {item.name}
                   </label>
                 ))}
               </div>
 
-              <div>
-                <div className="mb-2 text-sm font-bold uppercase text-[#1f1f1f]">Prix (DA)</div>
+              <div className="flex flex-col gap-2">
+                <div className="text-sm font-bold text-[#111111]">Prix (DA)</div>
                 <div className="grid grid-cols-2 gap-2">
-                  <Input placeholder="Min" />
-                  <Input placeholder="Max" />
+                  <Input placeholder="Min" className="min-h-[46px] rounded-[10px] border-[#E6E1D8] px-3 text-[#111111] placeholder:text-[#7A7A7A] focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60" />
+                  <Input placeholder="Max" className="min-h-[46px] rounded-[10px] border-[#E6E1D8] px-3 text-[#111111] placeholder:text-[#7A7A7A] focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60" />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-sm text-[#2b2b2b]">
-                <input type="checkbox" checked={inStockOnly} onChange={() => setInStockOnly((value) => !value)} />
+              <div className="flex items-center gap-2 text-sm text-[#5B5B5B]">
+                <input type="checkbox" checked={inStockOnly} onChange={() => setInStockOnly((value) => !value)} className="h-4 w-4 accent-[#D71920]" />
                 Disponible uniquement
               </div>
 
               <div className="flex gap-3">
-                <Button className="flex-1">Appliquer</Button>
-                <Button variant="secondary" className="flex-1">Réinitialiser</Button>
+                <Button variant="stationeryPrimary" className="flex-1">Appliquer</Button>
+                <Button variant="stationerySecondary" className="flex-1">Réinitialiser</Button>
               </div>
             </div>
           </aside>
 
-          <div>
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-[#2b2b2b]">
+          <div className="min-w-0">
+            <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-[#E6E1D8] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-sm font-medium text-[#5B5B5B]">
                 {filteredProducts.length} produits
               </div>
               <div className="flex items-center gap-3">
-                <label className="text-sm font-medium text-[#1f1f1f]">Trier :</label>
+                <label className="text-sm font-medium text-[#111111]">Trier :</label>
                 <select
                   value={sortBy}
                   onChange={(event) => setSortBy(event.target.value)}
-                  className="rounded-md border border-[#d7d0c5] bg-white px-3 py-2 text-sm text-[#202020] outline-none"
+                  className="min-h-[46px] rounded-[10px] border border-[#E6E1D8] bg-white px-3 py-2 text-sm text-[#111111] outline-none focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60 sm:w-60"
                 >
                   <option value="price_desc">Plus récents</option>
                   <option value="price_asc">Prix croissant</option>
@@ -183,7 +198,7 @@ export default function CatalogPage() {
                 ))}
               </div>
             ) : (
-              <p className="rounded-xl bg-white p-8 text-center text-sm text-[#4d4d4d]">
+              <p className="rounded-2xl border border-[#E6E1D8] bg-white p-8 text-center text-sm text-[#5B5B5B]">
                 Aucun produit ne correspond à votre sélection.
               </p>
             )}

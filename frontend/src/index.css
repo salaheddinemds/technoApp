@@ -1,25 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap");
 @import "tailwindcss";
 
 :root {
-  font-family: Inter, "Segoe UI", sans-serif;
+  font-family: "DM Sans", system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #1f1f1f;
-  background: #e7e1d8;
+  color: #111111;
+  background: #f7f5f0;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg-page: #e7e1d8;
-  --bg-dark: #171715;
-  --bg-panel: #f3efe9;
-  --card: #f0ece7;
-  --red: #ef3b2d;
-  --red-dark: #d22b14;
-  --yellow: #f6ce38;
-  --text: #131313;
-  --muted: #5d5d5d;
-  --border: #d9d0c6;
+  --bg-page: #f7f5f0;
+  --bg-dark: #111111;
+  --bg-panel: #ffffff;
+  --card: #ffffff;
+  --red: #d71920;
+  --red-dark: #c8141b;
+  --orange: #f0561e;
+  --yellow: #ffd400;
+  --amber: #ff9f1c;
+  --text: #111111;
+  --muted: #5b5b5b;
+  --border: #e6e1d8;
 }
 
 * {
@@ -36,6 +39,54 @@ body {
   min-height: 100vh;
   background: var(--bg-page);
   color: var(--text);
+}
+
+@keyframes design-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes design-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.design-gradient-shift {
+  background-size: 200% 200%;
+  animation: design-gradient-shift 10s ease infinite;
+}
+
+.design-rise {
+  animation: design-rise 0.7s ease both;
+}
+
+.design-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.design-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(17, 17, 17, 0.16);
+}
+
+.design-button {
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.design-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 18px rgba(215, 25, 32, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
 
 #root {
