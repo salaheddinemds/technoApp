@@ -1,8 +1,10 @@
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import technoLogo from './assets/techno-logo.png'
 import homeContent from './config/homeContent'
 
 function App() {
+  const navigate = useNavigate()
+
   return (
     <div className="min-h-screen bg-[#F7F5F0] text-[#111111]">
       <header className="sticky top-0 z-50 shadow-sm">
@@ -19,21 +21,31 @@ function App() {
               <img src={technoLogo} alt="Techno Stationery" className="h-14 w-auto object-contain" />
             </Link>
 
-            <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
+            <form
+              role="search"
+              onSubmit={(event) => {
+                event.preventDefault()
+                const query = new FormData(event.currentTarget).get('q')?.toString().trim()
+                const params = new URLSearchParams()
+                if (query) params.set('q', query)
+                const queryString = params.toString()
+                navigate(`/produits${queryString ? `?${queryString}` : ''}`)
+              }}
+              className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex"
+            >
               <div className="flex h-[46px] w-full max-w-[760px] items-center overflow-hidden rounded-[10px] border border-[#E6E1D8] bg-white">
-                <select className="h-full w-[200px] shrink-0 border-r border-[#E6E1D8] bg-transparent px-4 text-sm text-[#5B5B5B] outline-none">
-                  <option>Toutes les catégories</option>
-                </select>
                 <input
+                  name="q"
                   type="text"
+                  aria-label="Rechercher un produit"
                   placeholder="Rechercher un produit"
                   className="h-full min-w-0 flex-1 border-0 bg-transparent px-4 text-sm text-[#111111] outline-none placeholder:text-[#7A7A7A]"
                 />
               </div>
-              <button className="design-button min-h-[46px] shrink-0 rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-6 py-3 text-sm font-bold uppercase text-white shadow-sm">
+              <button type="submit" className="design-button min-h-[46px] shrink-0 rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-6 py-3 text-sm font-bold uppercase text-white shadow-sm">
                 Rechercher
               </button>
-            </div>
+            </form>
           </div>
         </div>
 
