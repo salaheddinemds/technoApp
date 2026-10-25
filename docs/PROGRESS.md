@@ -15,9 +15,9 @@
 - Bloquants : T25 dépend de T21
 
 ### Samad
-- En cours : T18 terminée localement ; commit, relecture et fusion restent à faire avant de cocher la tâche
+- En cours : T19, terminer le catalogue avec la recherche et la pagination synchronisée avec l'URL
 - Dernière séance : 2026-10-25, accueil restylé selon la maquette ; éléments communs, catalogue et contact également restylés sans modifier les appels API ni les états
-- Prochain pas : committer et faire fusionner T18 ; ensuite, terminer T19, notamment recherche et pagination synchronisée avec l'URL
+- Prochain pas : terminer T19 ; T18 fusionnée dans `main` via la PR #17
 - Bloquants : aucun
 
 ## À retenir (10 lignes au maximum)
@@ -84,7 +84,9 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Fait : accueil T18 terminé localement avec bannière, catégories, derniers produits et appel à l'action ; design aligné sur les maquettes.
 - Fait : éléments communs, catalogue et contact restylés ; fiche produit de Salah non modifiée.
 - Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussis après chaque étape de la refonte.
-- À faire : commit, relecture et fusion avant de cocher T18 ; T19 reste à compléter, notamment recherche et pagination avec état dans l'URL.
+- Commit : T18 enregistrée sur `samad-Dev` dans le commit `4571cb7`.
+- Fusion : T18 fusionnée dans `main` via la PR #17.
+- À faire : T19 reste à compléter, notamment recherche et pagination avec état dans l'URL.
 - Note : les maquettes mobiles citées dans le README sont absentes ; T20 responsive détaillée reste à traiter lorsque ces maquettes seront disponibles.
 
 ### 2026-10-23
