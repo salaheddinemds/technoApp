@@ -39,7 +39,7 @@ export default function ContactPage() {
             </svg>
           </span>
           <h2 className="text-lg font-bold text-[#111111]">E-mail</h2>
-          <p className="text-sm leading-6 text-[#5B5B5B]">contact@TechnoStationery.com</p>
+          <p className="break-all text-sm leading-6 text-[#5B5B5B]">contact@TechnoStationery.com</p>
         </article>
 
         <article className="design-lift flex flex-col gap-3 rounded-2xl border border-[#E6E1D8] bg-white p-5">
@@ -62,7 +62,7 @@ export default function ContactPage() {
                 <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z" />
               </svg>
             </span>
-            <h2 className="text-2xl font-extrabold text-[#111111]">Suivez-nous et écrivez-nous</h2>
+            <h2 className="min-w-0 text-xl font-extrabold text-[#111111] sm:text-2xl">Suivez-nous et écrivez-nous</h2>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

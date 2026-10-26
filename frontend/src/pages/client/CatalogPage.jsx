@@ -199,7 +199,7 @@ export default function CatalogPage() {
 
           {catalog.status === 'error' ? (
             <div role="alert" className="mt-5 rounded-xl border border-[#E6E1D8] bg-[#F7F5F0] p-4 text-sm text-[#5B5B5B]">
-              <p>Impossible de charger les catégories et les marques. {catalog.error.message}</p>
+              <p>{catalog.error.message}</p>
               <button
                 type="button"
                 onClick={() => setRetryCatalog((count) => count + 1)}
@@ -306,7 +306,7 @@ export default function CatalogPage() {
 
         <section aria-label="Résultats du catalogue" className="min-w-0">
           <div className="mb-4 grid gap-4 rounded-2xl border border-[#E6E1D8] bg-white p-4">
-            <form role="search" onSubmit={(event) => event.preventDefault()} className="flex items-end gap-3">
+            <form role="search" onSubmit={(event) => event.preventDefault()} className="flex flex-col gap-3 sm:flex-row sm:items-end">
               <Input
                 id="catalog-search"
                 label="Rechercher un produit"
@@ -314,13 +314,14 @@ export default function CatalogPage() {
                 placeholder="Nom ou description"
                 value={search}
                 onChange={(event) => updateParams({ q: event.target.value, page: 1 }, { replace: true })}
-                className="min-h-[46px] rounded-[10px] border-[#E6E1D8] px-3 text-[#111111] placeholder:text-[#7A7A7A] focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60"
+                className="min-h-[46px] min-w-0 rounded-[10px] border-[#E6E1D8] px-3 text-[#111111] placeholder:text-[#7A7A7A] focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60"
+                containerClassName="min-w-0 flex-1"
               />
               {search && (
                 <Button
                   variant="stationerySecondary"
                   onClick={() => updateParams({ q: null, page: 1 }, { replace: true })}
-                  className="shrink-0"
+                  className="self-start sm:shrink-0 sm:self-auto"
                 >
                   Effacer
                 </Button>
@@ -354,9 +355,9 @@ export default function CatalogPage() {
           ) : isProductsLoading ? (
             <LoadingState message="Chargement des produits..." />
           ) : result.status === 'error' ? (
-            <div role="alert" className="rounded-2xl border border-[#E6E1D8] bg-white p-8 text-center shadow-sm">
+            <div role="alert" className="rounded-2xl border border-[#E6E1D8] bg-white p-5 text-center shadow-sm sm:p-8">
               <h2 className="text-xl font-extrabold text-[#C8141B]">Impossible de charger les produits</h2>
-              <p className="mt-3 text-[#5B5B5B]">{result.error.message}</p>
+              <p className="mt-3 break-words text-[#5B5B5B]">{result.error.message}</p>
               <Button
                 variant="stationeryPrimary"
                 onClick={() => setRetryProducts((count) => count + 1)}
@@ -366,8 +367,8 @@ export default function CatalogPage() {
               </Button>
             </div>
           ) : isPageOutOfRange ? (
-            <div className="rounded-2xl border border-[#E6E1D8] bg-white p-8 text-center shadow-sm">
-              <h2 className="text-3xl font-extrabold text-[#111111]">Cette page n’existe pas</h2>
+            <div className="rounded-2xl border border-[#E6E1D8] bg-white p-5 text-center shadow-sm sm:p-8">
+              <h2 className="text-2xl font-extrabold text-[#111111] sm:text-3xl">Cette page n’existe pas</h2>
               <p className="mt-3 text-sm text-[#5B5B5B]">
                 La page demandée est hors de la plage disponible pour cette recherche.
               </p>

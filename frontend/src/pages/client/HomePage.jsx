@@ -39,9 +39,9 @@ export default function HomePage() {
 
   if (result.status === 'error') {
     return (
-      <div className="rounded-2xl border border-[#E6E1D8] bg-white p-8 text-center shadow-sm">
+      <div className="rounded-2xl border border-[#E6E1D8] bg-white p-5 text-center shadow-sm sm:p-8">
         <h1 className="text-2xl font-extrabold text-[#C8141B]">Impossible de charger l’accueil</h1>
-        <p className="mt-3 text-[#5B5B5B]">{result.error.message}</p>
+        <p className="mt-3 break-words text-[#5B5B5B]">{result.error.message}</p>
         <button
           type="button"
           onClick={() => {
