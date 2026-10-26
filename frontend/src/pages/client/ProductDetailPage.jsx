@@ -16,6 +16,7 @@ export default function ProductDetailPage() {
   const { slug } = useParams()
   const [result, setResult] = useState({ slug: null, product: null, error: null })
   const [selectedImage, setSelectedImage] = useState(null)
+  const [retryCount, setRetryCount] = useState(0)
   const product = result.slug === slug ? result.product : null
   const error = result.slug === slug ? result.error : null
   const isLoading = result.slug !== slug
@@ -39,7 +40,7 @@ export default function ProductDetailPage() {
     return () => {
       isCurrent = false
     }
-  }, [slug])
+  }, [slug, retryCount])
 
   if (isLoading) {
     return <LoadingState message="Chargement du produit..." />
@@ -47,22 +48,32 @@ export default function ProductDetailPage() {
 
   if (error) {
     return (
-      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-10 text-center">
+      <div className="rounded-[18px] border border-[#e7a39c] bg-[#fff1ef] p-5 text-center sm:p-10">
         <h1 className="text-2xl font-black uppercase text-[#c52e20]">Produit indisponible</h1>
-        <p className="mt-3 text-[#5b2a25]">{error.message}</p>
-        <Link to="/produits" className="mt-6 inline-flex rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white">
-          Voir les produits
-        </Link>
+        <p className="mt-3 break-words text-[#5b2a25]">{error.message}</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Button
+            onClick={() => {
+              setResult({ slug: null, product: null, error: null })
+              setRetryCount((count) => count + 1)
+            }}
+          >
+            Réessayer
+          </Button>
+          <Link to="/produits" className="inline-flex items-center rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white">
+            Voir les produits
+          </Link>
+        </div>
       </div>
     )
   }
 
   if (!product) {
     return (
-      <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-10 text-center">
-        <h1 className="text-5xl font-black uppercase text-[#ef3b2d]">404</h1>
-        <p className="mt-4 text-2xl font-bold text-[#1b1b1b]">Oups, cette page n’existe pas</p>
-        <div className="mt-6 flex justify-center gap-3">
+      <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-5 text-center sm:p-10">
+        <h1 className="text-4xl font-black uppercase text-[#ef3b2d] sm:text-5xl">404</h1>
+        <p className="mt-4 text-xl font-bold text-[#1b1b1b] sm:text-2xl">Oups, cette page n’existe pas</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link to="/" className="rounded-md bg-[#ef3b2d] px-5 py-3 text-sm font-bold uppercase text-white">Retour à l’accueil</Link>
           <Link to="/produits" className="rounded-md border border-[#d7d0c5] bg-white px-5 py-3 text-sm font-bold uppercase text-[#1d1d1d]">Voir les produits</Link>
         </div>
@@ -71,18 +82,19 @@ export default function ProductDetailPage() {
   }
 
   const image = selectedImage ?? product.images[0]
+  const specifications = Object.entries(product.specs ?? {})
   const contactMessage = encodeURIComponent(`Bonjour, je souhaite obtenir des informations sur ${product.name}.`)
 
   return (
     <div className="space-y-8">
-      <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f3efe9] p-6">
-        <div className="mb-4 text-sm text-[#4d4d4d]">Accueil · {product.category.name} · {product.name}</div>
+      <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f3efe9] p-4 sm:p-6">
+        <div className="mb-4 break-words text-sm text-[#4d4d4d]">Accueil · {product.category.name} · {product.name}</div>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[14px] border border-[#d7d0c5] bg-[#eae3da] p-4">
+          <div className="min-w-0 rounded-[14px] border border-[#d7d0c5] bg-[#eae3da] p-3 sm:p-4">
             {image ? (
-              <img src={image.url} alt={product.name} className="h-[420px] w-full rounded-xl object-cover" />
+              <img src={image.url} alt={product.name} className="h-[260px] w-full rounded-xl object-cover sm:h-[360px] lg:h-[420px]" />
             ) : (
-              <div className="flex h-[420px] items-center justify-center rounded-xl bg-[#dfd7cf] text-sm text-[#5d5d5d]">
+              <div className="flex h-[260px] items-center justify-center rounded-xl bg-[#dfd7cf] text-sm text-[#5d5d5d] sm:h-[360px] lg:h-[420px]">
                 Aucune photo disponible
               </div>
             )}
@@ -104,12 +116,12 @@ export default function ProductDetailPage() {
             <div className="inline-flex rounded-full bg-[#f5cc2b] px-2 py-1 text-[10px] font-black uppercase tracking-widest text-[#1d1d1d]">
               {product.category.name}
             </div>
-            <h1 className="mt-4 text-4xl font-black uppercase leading-[0.95] tracking-tighter text-[#1d1d1d]">
+            <h1 className="mt-4 break-words text-3xl font-black uppercase leading-[0.95] tracking-tighter text-[#1d1d1d] sm:text-4xl">
               {product.name}
             </h1>
-            <div className="mt-5 flex items-center justify-between rounded-xl bg-white p-4 shadow-sm">
-              <span className="text-xl font-medium text-[#484848]">À partir de</span>
-              <span className="text-3xl font-black text-[#1e1e1e]">{formatPrice(product.price)}</span>
+            <div className="mt-5 flex flex-wrap items-baseline justify-between gap-2 rounded-xl bg-white p-4 shadow-sm">
+              <span className="text-lg font-medium text-[#484848] sm:text-xl">À partir de</span>
+              <span className="text-2xl font-black text-[#1e1e1e] sm:text-3xl">{formatPrice(product.price)}</span>
             </div>
             <div className="mt-4 flex items-center gap-3 text-base font-medium text-[#1d1d1d]">
               <span className={`inline-block h-3 w-3 rounded-full ${product.inStock ? 'bg-[#3aa86b]' : 'bg-[#e2574d]'}`} />
@@ -126,12 +138,16 @@ export default function ProductDetailPage() {
             <div className="mt-6 rounded-xl border border-[#d7d0c5] bg-white p-4 text-sm text-[#2a2a2a]">
               <div className="mb-3 text-lg font-black uppercase text-[#1c1c1c]">Caractéristiques</div>
               <div className="grid gap-2">
-                {Object.entries(product.specs ?? {}).map(([name, value]) => (
-                  <div key={name} className="flex items-center justify-between gap-4 border-b border-[#ece7e1] pb-2 last:border-0">
-                    <span>{name}</span>
-                    <span className="text-right font-medium">{String(value)}</span>
-                  </div>
-                ))}
+                {specifications.length > 0 ? (
+                  specifications.map(([name, value]) => (
+                    <div key={name} className="flex flex-col justify-between gap-1 border-b border-[#ece7e1] pb-2 last:border-0 sm:flex-row sm:gap-4">
+                      <span>{name}</span>
+                      <span className="text-right font-medium">{String(value)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>Aucune caractéristique disponible pour le moment.</p>
+                )}
               </div>
             </div>
 

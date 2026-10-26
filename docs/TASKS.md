@@ -33,8 +33,8 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T16** Page détail produit : galerie photo, description, caractéristiques, bouton de contact — Salah · 2 j · après : T12, T14
 - [x] **T17** Brancher le frontend sur l'API : appels, chargement, erreurs — Samad · 1 j · après : T14, T13
 - [x] **T18** Page d'accueil : bannière, catégories, derniers produits — Samad · 2 j · après : T12, T17
-- [ ] **T19** Page catalogue : liste, recherche, panneau de filtres, tri, pagination (état dans l'URL) — Samad · 4 j · après : T15, T17
-- [ ] **T20** Adaptation mobile, états vides et messages d'erreur — Samad · 1,5 j · après : T18, T19
+- [x] **T19** Page catalogue : liste, recherche, panneau de filtres, tri, pagination (état dans l'URL) — Samad · 4 j · après : T15, T17
+- [x] **T20** Adaptation mobile, états vides et messages d'erreur — Samad · 1,5 j · après : T18, T19
 
 ## Phase 3 — Espace admin (rôles inversés) (Salah 9 j · Samad 10 j)
 

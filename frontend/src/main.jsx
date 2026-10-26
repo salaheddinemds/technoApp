@@ -20,9 +20,9 @@ createRoot(document.getElementById('root')).render(
           <Route
             path="*"
             element={
-              <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-10 text-center">
+              <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f5f2ee] p-5 text-center sm:p-10">
                 <h1 className="text-5xl font-black uppercase text-[#ef3b2d]">404</h1>
-                <p className="mt-4 text-2xl font-bold text-[#1b1b1b]">Oups, cette page n’existe pas</p>
+                <p className="mt-4 text-xl font-bold text-[#1b1b1b] sm:text-2xl">Oups, cette page n’existe pas</p>
               </div>
             }
           />

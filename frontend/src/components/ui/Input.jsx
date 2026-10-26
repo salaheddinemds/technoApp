@@ -1,6 +1,6 @@
-export default function Input({ label, id, name, value, onChange, placeholder, type = 'text', className = '', ...props }) {
+export default function Input({ label, id, name, value, onChange, placeholder, type = 'text', className = '', containerClassName = '', ...props }) {
   return (
-    <label htmlFor={id} className="block text-sm font-medium text-[#202020]">
+    <label htmlFor={id} className={`block text-sm font-medium text-[#202020] ${containerClassName}`}>
       {label && <span className="mb-2 block">{label}</span>}
       <input
         id={id}

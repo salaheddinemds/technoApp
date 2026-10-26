@@ -9,14 +9,14 @@ function App() {
     <div className="min-h-screen bg-[#F7F5F0] text-[#111111]">
       <header className="sticky top-0 z-50 shadow-sm">
         <div className="bg-gradient-to-r from-[#111111] to-[#3A3A3A] text-[#E8E8E8]">
-          <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-2 text-[13px] sm:px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2 text-center text-[11px] sm:justify-between sm:text-left sm:text-[13px] sm:px-6 lg:px-10">
             <span>Fabriqué en Algérie · qualité Techno Stationery</span>
             <span>+213 550 07 07 08</span>
           </div>
         </div>
 
         <div className="bg-white">
-          <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-stretch gap-3 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:px-10">
             <Link to="/" className="shrink-0">
               <img src={technoLogo} alt="Techno Stationery" className="h-14 w-auto object-contain" />
             </Link>
@@ -31,18 +31,19 @@ function App() {
                 const queryString = params.toString()
                 navigate(`/produits${queryString ? `?${queryString}` : ''}`)
               }}
-              className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex"
+              className="flex w-full min-w-0 items-center gap-2 md:flex-1 md:justify-center md:gap-3"
             >
               <div className="flex h-[46px] w-full max-w-[760px] items-center overflow-hidden rounded-[10px] border border-[#E6E1D8] bg-white">
                 <input
                   name="q"
                   type="text"
                   aria-label="Rechercher un produit"
+                  autoComplete="off"
                   placeholder="Rechercher un produit"
                   className="h-full min-w-0 flex-1 border-0 bg-transparent px-4 text-sm text-[#111111] outline-none placeholder:text-[#7A7A7A]"
                 />
               </div>
-              <button type="submit" className="design-button min-h-[46px] shrink-0 rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-6 py-3 text-sm font-bold uppercase text-white shadow-sm">
+              <button type="submit" className="design-button min-h-[46px] shrink-0 rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-3 py-3 text-xs font-bold uppercase text-white shadow-sm sm:px-6 sm:text-sm">
                 Rechercher
               </button>
             </form>
@@ -50,12 +51,12 @@ function App() {
         </div>
 
         <nav className="bg-gradient-to-r from-[#111111] to-[#3A3A3A] text-white">
-          <div className="mx-auto flex max-w-[1440px] items-center gap-8 px-4 py-3 sm:px-6 lg:px-10">
-            <button className="flex min-h-[46px] w-[260px] shrink-0 items-center gap-3 rounded-[10px] bg-gradient-to-r from-[#C8141B] to-[#D71920] px-5 py-3 text-sm font-bold uppercase text-white">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 py-3 sm:px-6 lg:justify-start lg:px-10">
+            <button className="hidden min-h-[46px] w-[260px] shrink-0 items-center gap-3 rounded-[10px] bg-gradient-to-r from-[#C8141B] to-[#D71920] px-5 py-3 text-sm font-bold uppercase text-white lg:flex">
               <span className="text-lg">☰</span>
               <span>Toutes les catégories</span>
             </button>
-            <div className="flex items-center gap-6 text-sm font-medium text-white/90">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs font-medium text-white/90 sm:gap-x-6 sm:text-sm">
               <NavLink
                 to="/"
                 end

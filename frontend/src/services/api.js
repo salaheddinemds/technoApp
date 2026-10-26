@@ -1,11 +1,27 @@
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? '/api'
+const SERVICE_UNAVAILABLE_STATUSES = new Set([502, 503, 504])
+const SERVICE_UNAVAILABLE_MESSAGE = 'Le service est momentanément indisponible. Veuillez réessayer dans un instant.'
 
 async function request(path) {
-  const response = await fetch(`${apiBaseUrl}${path}`)
+  let response
+
+  try {
+    response = await fetch(`${apiBaseUrl}${path}`)
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error(SERVICE_UNAVAILABLE_MESSAGE, { cause: error })
+    }
+
+    throw error
+  }
+
   const payload = await response.json().catch(() => null)
 
   if (!response.ok) {
-    const error = new Error(payload?.error?.message ?? `L'API a répondu avec le statut ${response.status}.`)
+    const message = SERVICE_UNAVAILABLE_STATUSES.has(response.status)
+      ? SERVICE_UNAVAILABLE_MESSAGE
+      : payload?.error?.message ?? `L'API a répondu avec le statut ${response.status}.`
+    const error = new Error(message)
     error.status = response.status
     throw error
   }
