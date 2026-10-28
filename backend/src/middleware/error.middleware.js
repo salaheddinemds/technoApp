@@ -8,6 +8,16 @@ export function notFoundHandler(_request, response) {
 }
 
 export function errorHandler(error, _request, response, _next) {
+  if (error.type === 'entity.parse.failed') {
+    response.status(400).json({
+      error: {
+        code: 'VALIDATION_ERROR',
+        message: 'Le corps JSON est invalide.'
+      }
+    });
+    return;
+  }
+
   console.error(error);
 
   response.status(error.statusCode ?? 500).json({
