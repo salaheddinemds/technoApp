@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const categories = [
   { name: 'Scolaire', slug: 'scolaire' },
@@ -377,10 +378,27 @@ async function main() {
     throw new Error('Seed refusé : DATABASE_URL pointe vers Neon. Utilisez uniquement une base PostgreSQL locale.');
   }
 
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminEmail) || adminEmail.length > 254) {
+    throw new Error('ADMIN_EMAIL doit contenir une adresse e-mail valide.');
+  }
+  if (!adminPassword || Buffer.byteLength(adminPassword, 'utf8') > 72) {
+    throw new Error('ADMIN_PASSWORD doit être renseigné et contenir au plus 72 octets.');
+  }
+
+  const passwordHash = await bcrypt.hash(adminPassword, 12);
+
   const prisma = new PrismaClient();
 
   try {
     await prisma.$transaction(async (transaction) => {
+      await transaction.admin.upsert({
+        where: { email: adminEmail },
+        update: { passwordHash },
+        create: { email: adminEmail, passwordHash }
+      });
+
       const categoryIds = new Map();
       for (const category of categories) {
         const savedCategory = await transaction.category.upsert({

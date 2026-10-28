@@ -103,6 +103,12 @@ Exemple :
 | POST | `/api/auth/login` | Public |
 | GET | `/api/auth/me` | Jeton JWT requis |
 
+Le compte est créé par `npm run db:create-admin` avec `ADMIN_EMAIL` et
+`ADMIN_PASSWORD` dans `backend/.env` ; le mot de passe est stocké sous forme
+hachée avec bcrypt. Cette commande ne remplace pas un compte existant. Le seed
+`npm run db:seed` crée ou met à jour ce compte. Le serveur requiert également
+un `JWT_SECRET` d'au moins 32 octets pour signer les jetons.
+
 `POST /api/auth/login` reçoit `{ "email", "password" }` et renvoie 200 :
 
 ```json
