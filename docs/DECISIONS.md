@@ -22,6 +22,6 @@
 - **D-012** (retenue, T06) Prix : entier sans centimes, en dinars algériens (DA). Disponible = `stock > 0`.
 - **D-013** (retenue, T08) Contrat d'API : formes de réponse (`data`, `meta`, `error`), routes et noms des paramètres de recherche sont définis dans `API.md`.
 - **D-014** (ouverte, T25) Jeton JWT : envoyé dans l'en-tête `Authorization: Bearer`. Où le garder dans le navigateur : `localStorage` (simple, mais lisible par un script injecté) ou cookie `httpOnly` (plus sûr, mais demande des réglages CORS et une protection CSRF).
-- **D-015** (à valider, T21) Compte admin : créé par le script `prisma/seed.js` à partir de `ADMIN_EMAIL` et `ADMIN_PASSWORD` du fichier `.env` ; mot de passe haché avec bcrypt.
+- **D-015** (retenue, T21) Compte admin : créé par le script `prisma/seed.js` à partir de `ADMIN_EMAIL` et `ADMIN_PASSWORD` du fichier `.env` ; mot de passe haché avec bcrypt.
 - **D-016** (à valider, T16) Coordonnées de contact de la marque (téléphone, WhatsApp, e-mail) : constantes dans `frontend/src/config.js`, fournies par le client.
 - **D-017** (à valider, T06) Caractéristiques d'un produit : un champ JSON `specs` (nom de la caractéristique → valeur).
