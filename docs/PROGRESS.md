@@ -5,20 +5,20 @@
 
 ## État actuel
 
-- Phase en cours : 2 · Espace client (semaines 3 à 5)
+- Phase en cours : 3 · Espace admin (rôles inversés) (semaines 5 à 7)
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : aucune ; T16 est terminée et fusionnée dans `main` via la PR #15
-- Dernière séance : 2026-10-20, page détail branchée sur l'API et vérifiée avec galerie, description, caractéristiques et boutons de contact
-- Prochain pas : commencer T25 après la fin de T21, dont Samad est responsable
-- Bloquants : T25 dépend de T21
+- En cours : préparation de T25 (page de connexion admin, routes protégées et session)
+- Dernière séance : T21 validé, la base d'authentification admin est maintenant en place et prête à servir la couche interface
+- Prochain pas : finaliser T25 puis avancer sur T27 et T28 selon le calendrier de phase 3
+- Bloquants : T25 n'a plus de blocage après la validation de T21
 
 ### Samad
-- En cours : T20 terminée localement sur `samad-Dev` ; relecture et fusion de T19 et T20 restent à faire
-- Dernière séance : 2026-10-26, responsive client terminé et messages techniques d'indisponibilité remplacés par un message visiteur commun
-- Prochain pas : faire relire et fusionner T19 et T20, puis commencer T21
-- Bloquants : relecture et fusion en attente
+- En cours : T22 implémentée localement ; gestion des produits protégée par JWT et validée avant revue/fusion
+- Dernière séance : 2026-10-30, routes admin de liste, détail, création, modification et suppression des produits ajoutées
+- Prochain pas : faire relire et fusionner T22, puis poursuivre T23 et T24
+- Bloquants : aucun ; T22 reste à relire et fusionner avant de cocher la tâche
 
 ## À retenir (10 lignes au maximum)
 
@@ -79,6 +79,12 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 
 ## Journal de Samad (le plus récent en haut)
+
+### 2026-10-30
+- Fait : T22 implémentée localement avec les routes admin de liste, détail, création, modification et suppression des produits.
+- Fait : validation des champs, des catégories/marques référencées et génération d'un slug unique ; les filtres de la liste publique sont réutilisés.
+- Vérifié : schéma Prisma, syntaxe et chargement de l'application ; contrôles simulés de création, modification, suppression et validation.
+- Prochain pas : revue et fusion de T22, puis commencer T23.
 
 ### 2026-10-26
 - Fait : T20 terminée ; adaptation mobile, états vides et erreurs des pages client traités.
