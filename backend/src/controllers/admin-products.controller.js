@@ -1,4 +1,5 @@
 import prisma from '../lib/prisma.js';
+import { deleteCloudinaryImages } from '../lib/cloudinary.js';
 import { buildProductWhere, parseProductsQuery } from '../lib/product-filters.js';
 
 const productCardSelect = {
@@ -339,7 +340,29 @@ export async function deleteAdminProduct(request, response) {
   const id = parseProductId(request.params.id);
 
   try {
-    await prisma.product.delete({ where: { id } });
+    const deleted = await prisma.$transaction(async (transaction) => {
+      const lockedProducts = await transaction.$queryRaw`
+        SELECT id FROM products WHERE id = ${id} FOR UPDATE
+      `;
+
+      if (lockedProducts.length === 0) {
+        return false;
+      }
+
+      const images = await transaction.productImage.findMany({
+        where: { productId: id },
+        select: { cloudinaryPublicId: true }
+      });
+      await deleteCloudinaryImages(images.map((image) => image.cloudinaryPublicId));
+      await transaction.product.delete({ where: { id } });
+      return true;
+    });
+
+    if (!deleted) {
+      sendNotFound(response);
+      return;
+    }
+
     response.status(204).end();
   } catch (error) {
     if (error.code === 'P2025') {
