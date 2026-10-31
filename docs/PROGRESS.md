@@ -15,10 +15,10 @@
 - Bloquants : T25 n'a plus de blocage après la validation de T21
 
 ### Samad
-- En cours : T22 implémentée localement ; gestion des produits protégée par JWT et validée avant revue/fusion
-- Dernière séance : 2026-10-30, routes admin de liste, détail, création, modification et suppression des produits ajoutées
-- Prochain pas : faire relire et fusionner T22, puis poursuivre T23 et T24
-- Bloquants : aucun ; T22 reste à relire et fusionner avant de cocher la tâche
+- En cours : préparation de T24 (envoi des photos vers Cloudinary)
+- Dernière séance : 2026-10-31, T23 terminée et fusionnée dans `main` ; routes admin des catégories et marques vérifiées sur la base locale
+- Prochain pas : commencer T24
+- Bloquants : aucun
 
 ## À retenir (10 lignes au maximum)
 
@@ -80,11 +80,20 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 ## Journal de Samad (le plus récent en haut)
 
+### 2026-10-31
+- Fait : T23 implémentée avec les routes admin protégées de création, renommage et suppression des catégories et marques.
+- Fait : validation des noms, génération de slugs uniques et réponses avec `productCount` ; la suppression renvoie `409 HAS_PRODUCTS` lorsqu’un produit est rattaché.
+- Vérifié : création, doublon de nom, renommage, suppression et refus de suppression avec produits rattachés sur la base locale ; syntaxe JavaScript et schéma Prisma valides.
+- Fusion : T23 fusionnée dans `main` ; tâche cochée dans `TASKS.md`.
+- Prochain pas : commencer T24.
+
 ### 2026-10-30
 - Fait : T22 implémentée localement avec les routes admin de liste, détail, création, modification et suppression des produits.
 - Fait : validation des champs, des catégories/marques référencées et génération d'un slug unique ; les filtres de la liste publique sont réutilisés.
 - Vérifié : schéma Prisma, syntaxe et chargement de l'application ; contrôles simulés de création, modification, suppression et validation.
-- Prochain pas : revue et fusion de T22, puis commencer T23.
+- Commit : T22 poussée sur `samad-Dev` dans le commit `7084183`.
+- Fusion : T22 fusionnée dans `main`.
+- Prochain pas : poursuivre T23.
 
 ### 2026-10-26
 - Fait : T20 terminée ; adaptation mobile, états vides et erreurs des pages client traités.
