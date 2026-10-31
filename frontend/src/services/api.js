@@ -1,12 +1,24 @@
+import { getAdminToken } from './auth'
+
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? '/api'
 const SERVICE_UNAVAILABLE_STATUSES = new Set([502, 503, 504])
 const SERVICE_UNAVAILABLE_MESSAGE = 'Le service est momentanément indisponible. Veuillez réessayer dans un instant.'
 
-async function request(path) {
+async function request(path, options = {}) {
   let response
 
   try {
-    response = await fetch(`${apiBaseUrl}${path}`)
+    const token = getAdminToken()
+    const headers = new Headers(options.headers)
+
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`)
+    }
+
+    response = await fetch(`${apiBaseUrl}${path}`, {
+      ...options,
+      headers,
+    })
   } catch (error) {
     if (error instanceof TypeError) {
       throw new Error(SERVICE_UNAVAILABLE_MESSAGE, { cause: error })
@@ -31,6 +43,33 @@ async function request(path) {
   }
 
   return payload
+}
+
+export async function loginAdmin(email, password) {
+  const payload = await request('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  })
+
+  if (
+    typeof payload.data?.token !== 'string'
+    || !payload.data.admin
+  ) {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
+export async function getCurrentAdmin() {
+  const payload = await request('/auth/me')
+
+  if (!payload.data || typeof payload.data.email !== 'string') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
 }
 
 function toQueryString(params) {

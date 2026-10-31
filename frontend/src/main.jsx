@@ -7,6 +7,9 @@ import CatalogPage from './pages/client/CatalogPage.jsx'
 import ContactPage from './pages/client/ContactPage.jsx'
 import HomePage from './pages/client/HomePage.jsx'
 import ProductDetailPage from './pages/client/ProductDetailPage.jsx'
+import RequireAdmin from './components/admin/RequireAdmin.jsx'
+import AdminHomePage from './pages/admin/AdminHomePage.jsx'
+import AdminLoginPage from './pages/admin/AdminLoginPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,6 +20,10 @@ createRoot(document.getElementById('root')).render(
           <Route path="produits" element={<CatalogPage />} />
           <Route path="produits/:slug" element={<ProductDetailPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="admin/login" element={<AdminLoginPage />} />
+          <Route element={<RequireAdmin />}>
+            <Route path="admin" element={<AdminHomePage />} />
+          </Route>
           <Route
             path="*"
             element={
