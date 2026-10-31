@@ -167,7 +167,7 @@ admin exposent `stock` en plus de `inStock`.
 ### Photos
 
 `POST /api/admin/products/:id/images` utilise `multipart/form-data` avec le champ
-`images`. Les fichiers acceptés sont JPEG, PNG ou WebP, de 5 Mo au maximum chacun,
+`images`. Les fichiers acceptés sont JPEG, PNG ou WebP, de 5 Mio (5 × 1024 × 1024 octets) au maximum chacun,
 avec 8 photos au maximum par produit. L'envoi est tout ou rien. La première photo
 est en position 0 et constitue la photo principale.
 
@@ -205,7 +205,8 @@ base. Les erreurs de validation peuvent détailler les champs concernés :
 | 404 | `NOT_FOUND` | Ressource inconnue |
 | 409 | `NAME_TAKEN` | Nom de catégorie ou marque déjà pris |
 | 409 | `HAS_PRODUCTS` | Suppression d'une catégorie ou marque non vide |
-| 413 | `FILE_TOO_LARGE` | Photo de plus de 5 Mo |
+| 413 | `FILE_TOO_LARGE` | Photo de plus de 5 Mio (5 × 1024 × 1024 octets) |
 | 415 | `FILE_TYPE_NOT_ALLOWED` | Format de photo refusé |
 | 429 | `TOO_MANY_REQUESTS` | Trop de tentatives de connexion |
+| 503 | `CLOUDINARY_NOT_CONFIGURED` | Identifiants Cloudinary manquants côté serveur |
 | 500 | `SERVER_ERROR` | Erreur inattendue |

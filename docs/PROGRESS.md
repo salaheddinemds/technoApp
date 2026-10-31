@@ -15,10 +15,10 @@
 - Bloquants : T25 n'a plus de blocage après la validation de T21
 
 ### Samad
-- En cours : préparation de T24 (envoi des photos vers Cloudinary)
-- Dernière séance : 2026-10-31, T23 terminée et fusionnée dans `main` ; routes admin des catégories et marques vérifiées sur la base locale
-- Prochain pas : commencer T24
-- Bloquants : aucun
+- En cours : T24 terminée ; prochaine tâche : T31 (référencement et vitesse)
+- Dernière séance : 2026-10-31, upload multipart, validation des images et nettoyage Cloudinary ajoutés ; 6 tests automatisés réussis
+- Prochain pas : commencer T31
+- À noter : l'intégration avec un compte Cloudinary réel reste à vérifier
 
 ## À retenir (10 lignes au maximum)
 
@@ -27,7 +27,7 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Dépôt GitHub : à compléter (T01)
 - Lancer le frontend : `cd frontend` puis `npm run dev` (http://localhost:5173)
 - Vérifier le frontend : depuis `frontend/`, `npm run lint` et `npm run build`
-- Lancer l'API : depuis `backend/`, `npm install` puis `npm run dev` (T09)
+- Lancer l'API : depuis `backend/`, `npm install` puis `npm run dev` ; tests : `npm test`
 - Base de données locale : `technoapp_local` sur `localhost:5432`
 - Adresses en ligne (frontend, API) : à compléter (phase 5)
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
@@ -81,6 +81,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 ## Journal de Samad (le plus récent en haut)
 
 ### 2026-10-31
+- Fait : T24 cochée ; implémentation de l'upload d'images vers Cloudinary, des contrôles de format et de taille, et du nettoyage lors des suppressions.
+- Appris : vérifier la signature du fichier est plus fiable que se fier à son extension ou au type MIME déclaré.
+- Vérifié : 6 tests passent, dont les limites Multer de 5 Mio et 8 fichiers ; Prisma est valide et la route répond 401 sans jeton.
+- À noter : envoi et suppression réels avec un compte Cloudinary non testés dans cette séance.
+- Prochain pas : commencer T31, puis vérifier l'intégration Cloudinary dans un environnement configuré.
+
+### 2026-10-31
 - Fait : T23 implémentée avec les routes admin protégées de création, renommage et suppression des catégories et marques.
 - Fait : validation des noms, génération de slugs uniques et réponses avec `productCount` ; la suppression renvoie `409 HAS_PRODUCTS` lorsqu’un produit est rattaché.
 - Vérifié : création, doublon de nom, renommage, suppression et refus de suppression avec produits rattachés sur la base locale ; syntaxe JavaScript et schéma Prisma valides.
@@ -101,31 +108,3 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Appris : le client API centralise la traduction des erreurs de disponibilité pour garder un message cohérent entre les pages.
 - Vérifié : lint, build et `git diff --check` ; le navigateur affiche le message attendu sur l'accueil, les résultats et les filtres lors d'une indisponibilité 502.
 - Prochain pas : faire relire et fusionner T19 et T20, puis commencer T21.
-
-### 2026-10-26
-- Fait : T20 complétée avec recherche et navigation adaptées aux petits écrans, formulaires catalogue empilés sur mobile et fiche produit responsive.
-- Fait : états vides documentés sur les pages client ; nouvelle tentative ajoutée aux erreurs de chargement de la fiche produit.
-- Vérifié : lint, build et `git diff --check` réussis ; contrôle navigateur à 320, 375, 768 et 1280 px sans débordement horizontal, avec recherche et liens de navigation visibles à 320 px.
-- Limite de vérification : l'API répondait 502 dans l'environnement navigateur ; les états d'erreur et boutons Réessayer s'affichent, mais les réponses réussies de l'API n'ont pas pu être vérifiées dans ce contrôle.
-- Prochain pas : faire relire et fusionner T19 et T20, puis commencer T21.
-
-### 2026-10-25
-- Fait : accueil T18 terminé localement avec bannière, catégories, derniers produits et appel à l'action ; design aligné sur les maquettes.
-- Fait : éléments communs, catalogue et contact restylés ; fiche produit de Salah non modifiée.
-- Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussis après chaque étape de la refonte.
-- Commit : T18 enregistrée sur `samad-Dev` dans le commit `4571cb7`.
-- Fusion : T18 fusionnée dans `main` via la PR #17.
-- Fait : T19 implémentée sur `samad-Dev` dans le commit `81a9985` : recherche, filtres, tri, pagination avec état dans l'URL et message « Cette page n’existe pas » pour une page hors plage.
-- Vérifié : `npm run lint`, `npm run build` et `git diff --check`.
-- À faire à cette date : relecture et fusion de T19 dans `main`, avant de commencer T20.
-
-### 2026-10-23
-- Fait : T17 fusionnée dans `main` via la PR #16 ; l'accueil et le catalogue chargent les catégories et les produits depuis l'API.
-- Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussis depuis `frontend/`.
-- Prochain pas : T18, compléter la page d'accueil avec les catégories et les derniers produits.
-
-### 2026-10-15
-- Vérifié : T13 fonctionne sur PostgreSQL local ; le seed exécuté deux fois laisse 8 catégories, 2 marques, 30 produits et 30 images, sans doublons.
-- Vérifié : les produits en rupture et le nom très long sont présents ; le script refuse les URL Neon.
-- Prochain pas : demander à Salah la relecture de T13, puis pousser et fusionner avant de cocher la tâche.
-- Bloquants : relecture et fusion en attente.
