@@ -5,6 +5,7 @@ import { config } from './config/env.js';
 import { requireAdmin } from './middleware/auth.middleware.js';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware.js';
 import adminProductsRouter from './routes/admin-products.routes.js';
+import adminTaxonomyRouter from './routes/admin-taxonomy.routes.js';
 import authRouter from './routes/auth.routes.js';
 import catalogRouter from './routes/catalog.routes.js';
 import healthRouter from './routes/health.routes.js';
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api', catalogRouter);
-app.use('/api/admin', requireAdmin, adminProductsRouter);
+app.use('/api/admin', requireAdmin, adminProductsRouter, adminTaxonomyRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

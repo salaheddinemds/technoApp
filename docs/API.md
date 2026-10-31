@@ -175,6 +175,8 @@ est en position 0 et constitue la photo principale.
 
 Les corps de création et de renommage sont `{ "name": "..." }`. Le nom fait 1 à
 60 caractères, est unique dans son type, et le slug est fabriqué par l'API.
+Lors d'un renommage, le slug est recalculé ; un suffixe `-2`, `-3` est ajouté
+en cas de doublon.
 Une catégorie ou une marque contenant encore des produits ne peut pas être supprimée.
 
 ## Erreurs et validation

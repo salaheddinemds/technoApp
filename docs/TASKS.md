@@ -39,8 +39,8 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 ## Phase 3 — Espace admin (rôles inversés) (Salah 9 j · Samad 10 j)
 
 - [x] **T21** API : connexion admin avec mot de passe haché (bcrypt), jeton JWT, routes protégées — Samad · 3 j · après : T10
-- [ ] **T22** API : ajouter, modifier et supprimer un produit, avec validation des données — Samad · 3 j · après : T21
-- [ ] **T23** API : gérer catégories et marques, avec la règle à appliquer si des produits y sont rattachés — Samad · 2 j · après : T21
+- [x] **T22** API : ajouter, modifier et supprimer un produit, avec validation des données — Samad · 3 j · après : T21
+- [x] **T23** API : gérer catégories et marques, avec la règle à appliquer si des produits y sont rattachés — Samad · 2 j · après : T21
 - [ ] **T24** API : envoi des photos vers Cloudinary, avec contrôle du type et de la taille — Samad · 2 j · après : T22
 - [ ] **T25** Page de connexion admin, routes protégées, mémorisation de la session — Salah · 2 j · après : T21
 - [ ] **T26** Tableau de bord : liste des produits, recherche, suppression avec confirmation — Salah · 2 j · après : T22, T25
