@@ -353,7 +353,10 @@ export async function deleteAdminProduct(request, response) {
         where: { productId: id },
         select: { cloudinaryPublicId: true }
       });
-      await deleteCloudinaryImages(images.map((image) => image.cloudinaryPublicId));
+      const cloudinaryPublicIds = images
+        .map((image) => image.cloudinaryPublicId)
+        .filter((publicId) => !publicId.startsWith('seed-placeholder-'));
+      await deleteCloudinaryImages(cloudinaryPublicIds);
       await transaction.product.delete({ where: { id } });
       return true;
     });
