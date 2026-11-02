@@ -9,10 +9,10 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T27 implémentée sur `salah-dev`, changements frontend à tester, committer et faire relire
+- En cours : T28 à commencer après la fusion de T27
 - Dernière séance : formulaire admin d'ajout/modification avec catégories, marques, caractéristiques et upload de photos
-- Prochain pas : tester T27 avec Cloudinary, committer, ouvrir la pull request puis attendre la relecture
-- Bloquants : aucun ; T27 reste décochée jusqu'à sa fusion dans `main`
+- Prochain pas : commencer les écrans de gestion des catégories et des marques
+- Bloquants : aucun
 
 ### Samad
 - En cours : T24 terminée ; prochaine tâche : T31 (référencement et vitesse)
