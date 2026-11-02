@@ -38,6 +38,10 @@ async function request(path, options = {}) {
     throw error
   }
 
+  if (response.status === 204) {
+    return { data: null }
+  }
+
   if (typeof payload !== 'object' || payload === null || !('data' in payload)) {
     throw new Error("La réponse de l'API est invalide.")
   }
@@ -93,6 +97,20 @@ export async function getProducts(params = {}) {
   }
 
   return { products: payload.data, meta: payload.meta }
+}
+
+export async function getAdminProducts(params = {}) {
+  const payload = await request(`/admin/products${toQueryString(params)}`)
+
+  if (!Array.isArray(payload.data) || !payload.meta) {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return { products: payload.data, meta: payload.meta }
+}
+
+export async function deleteAdminProduct(productId) {
+  await request(`/admin/products/${productId}`, { method: 'DELETE' })
 }
 
 export async function getCategories() {

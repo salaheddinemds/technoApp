@@ -9,10 +9,10 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : préparation de T25 (page de connexion admin, routes protégées et session)
-- Dernière séance : T21 validé, la base d'authentification admin est maintenant en place et prête à servir la couche interface
-- Prochain pas : finaliser T25 puis avancer sur T27 et T28 selon le calendrier de phase 3
-- Bloquants : T25 n'a plus de blocage après la validation de T21
+- En cours : T26 terminée sur `salah-dev`, en attente de relecture et fusion dans `main`
+- Dernière séance : tableau de bord admin livré avec liste, recherche, suppression confirmée et gestion des états d'interface
+- Prochain pas : ouvrir la pull request T26 ; après fusion, commencer T27
+- Bloquants : aucun ; T26 doit encore être relue et fusionnée avant d'être cochée
 
 ### Samad
 - En cours : T24 terminée ; prochaine tâche : T31 (référencement et vitesse)
@@ -33,6 +33,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
 
 ## Journal de Salah (le plus récent en haut)
+
+### 2026-11-01
+- Fait : T26 implémentée avec la liste des produits admin, la recherche par nom et la suppression avec confirmation.
+- Corrigé : les produits seedés avec des images provisoires ne déclenchent plus d'appel Cloudinary lors de leur suppression locale.
+- Vérifié : test manuel de connexion et recherche ; `npm run lint`, `npm run build`, `npm test` et `git diff --check` réussissent.
+- Appris : une suppression de produit retire le produit complet et son stock associé ; le stock est une quantité du produit, pas une liste de produits.
+- Prochain pas : ouvrir la pull request T26 et attendre la relecture avant de fusionner.
 
 ### 2026-10-20
 - Fait : T16 implémentée avec l'appel `GET /api/products/:slug`, les états de chargement et d'erreur, la galerie photo, la description et les caractéristiques.
