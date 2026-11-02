@@ -58,15 +58,15 @@ export default function HomePage() {
 
   return (
     <div className="design-rise space-y-10 py-2">
-      <section className="design-gradient-shift relative isolate overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8141B] via-[#D71920] to-[#F0561E] p-6 text-white shadow-[0_12px_32px_rgba(17,17,17,0.12)] sm:p-8 lg:p-10">
+      <section className="design-gradient-shift relative isolate mx-auto w-full max-w-[1280px] overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8141B] via-[#D71920] to-[#F0561E] p-5 text-white shadow-[0_12px_32px_rgba(17,17,17,0.12)] sm:p-6 lg:p-8">
         <div aria-hidden="true" className="pointer-events-none absolute -right-12 -top-24 h-64 w-64 rounded-full bg-white/10" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 right-20 h-56 w-56 rounded-full bg-[#FFD400]/30" />
-        <div className="relative grid gap-8 lg:grid-cols-[1.25fr_0.85fr] lg:items-stretch">
-          <div className="flex flex-col items-start justify-center gap-5 py-2">
-            <h1 className="max-w-[520px] text-4xl font-extrabold leading-tight tracking-normal text-white sm:text-[46px]">
+        <div className="relative grid gap-6 lg:grid-cols-[1.25fr_0.85fr] lg:items-stretch">
+          <div className="flex flex-col items-start justify-center gap-4">
+            <h1 className="max-w-[520px] text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-4xl lg:text-[40px]">
               {homeContent.heroTitle}
             </h1>
-            <p className="max-w-[460px] text-lg leading-relaxed text-white/90">
+            <p className="max-w-[460px] text-base leading-relaxed text-white/90 sm:text-lg">
               {homeContent.brandTagline}
             </p>
             <div className="flex flex-wrap gap-3">
@@ -91,13 +91,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid gap-5 lg:grid-rows-2">
-            <div className="design-lift flex min-h-[190px] flex-col justify-end gap-1.5 rounded-[20px] bg-gradient-to-br from-[#FFD400] to-[#FF9F1C] p-6 text-[#111111]">
-              <div className="text-xl font-bold">{homeContent.bannerTwo}</div>
+          <div className="grid gap-4 lg:grid-rows-2">
+            <div className="design-lift flex min-h-[130px] flex-col justify-end gap-1.5 rounded-[16px] bg-gradient-to-br from-[#FFD400] to-[#FF9F1C] p-5 text-[#111111]">
+              <div className="text-lg font-bold">{homeContent.bannerTwo}</div>
               <div>{homeContent.offer}</div>
             </div>
-            <div className="design-lift flex min-h-[190px] flex-col justify-end gap-1.5 rounded-[20px] bg-gradient-to-br from-[#111111] to-[#3A3A3A] p-6 text-white">
-              <div className="text-xl font-bold">{homeContent.bannerThree}</div>
+            <div className="design-lift flex min-h-[130px] flex-col justify-end gap-1.5 rounded-[16px] bg-gradient-to-br from-[#111111] to-[#3A3A3A] p-5 text-white">
+              <div className="text-lg font-bold">{homeContent.bannerThree}</div>
               <div className="text-white/80">{homeContent.offer}</div>
             </div>
           </div>
