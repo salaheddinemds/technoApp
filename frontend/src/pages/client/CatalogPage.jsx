@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ProductCard from '../../components/ProductCard'
 import Button from '../../components/ui/Button'
@@ -7,6 +7,153 @@ import LoadingState from '../../components/ui/LoadingState'
 import { getBrands, getCategories, getProducts } from '../../services/api'
 
 const PAGE_SIZE = 12
+const SORT_OPTIONS = [
+  { value: 'newest', label: 'Plus récents' },
+  { value: 'price_asc', label: 'Prix croissant' },
+  { value: 'price_desc', label: 'Prix décroissant' },
+  { value: 'name', label: 'Nom' },
+]
+
+function SortSelect({ value, onChange }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const containerRef = useRef(null)
+  const triggerRef = useRef(null)
+  const selectedIndex = Math.max(0, SORT_OPTIONS.findIndex((option) => option.value === value))
+
+  useEffect(() => {
+    if (!isOpen) return undefined
+
+    function closeOnOutsideClick(event) {
+      if (!containerRef.current?.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
+  }, [isOpen])
+
+  useEffect(() => {
+    if (isOpen) {
+      containerRef.current?.querySelector(`[data-sort-option="${activeIndex}"]`)?.focus()
+    }
+  }, [activeIndex, isOpen])
+
+  function openAt(index) {
+    setActiveIndex(index)
+    setIsOpen(true)
+  }
+
+  function selectOption(index) {
+    onChange(SORT_OPTIONS[index].value)
+    setIsOpen(false)
+    triggerRef.current?.focus()
+  }
+
+  function handleTriggerKeyDown(event) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      if (!isOpen) {
+        openAt(selectedIndex)
+      } else {
+        setActiveIndex((index) => (index + (event.key === 'ArrowDown' ? 1 : -1) + SORT_OPTIONS.length) % SORT_OPTIONS.length)
+      }
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      if (!isOpen) openAt(selectedIndex)
+    } else if (event.key === 'Escape' && isOpen) {
+      event.preventDefault()
+      setIsOpen(false)
+    }
+  }
+
+  function handleOptionKeyDown(event, index) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      setActiveIndex((index + (event.key === 'ArrowDown' ? 1 : -1) + SORT_OPTIONS.length) % SORT_OPTIONS.length)
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault()
+      setActiveIndex(event.key === 'Home' ? 0 : SORT_OPTIONS.length - 1)
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      selectOption(index)
+    } else if (event.key === 'Escape') {
+      event.preventDefault()
+      setIsOpen(false)
+      triggerRef.current?.focus()
+    } else if (event.key === 'Tab') {
+      setIsOpen(false)
+    }
+  }
+
+  return (
+    <div ref={containerRef} className="relative sm:w-60">
+      <button
+        ref={triggerRef}
+        id="catalog-sort"
+        type="button"
+        role="combobox"
+        aria-labelledby="catalog-sort-label catalog-sort-value"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="catalog-sort-options"
+        onClick={() => (isOpen ? setIsOpen(false) : openAt(selectedIndex))}
+        onKeyDown={handleTriggerKeyDown}
+        className="flex min-h-[46px] w-full items-center justify-between gap-3 rounded-[10px] border border-[#444444] bg-[#1a1a1a] px-4 py-2 text-left text-sm text-white outline-none hover:border-[#FFD400] focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60"
+      >
+        <span id="catalog-sort-value">{SORT_OPTIONS[selectedIndex].label}</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="#FFD400"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          className={`h-4 w-4 shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+        >
+          <path d="m5 7.5 5 5 5-5" />
+        </svg>
+      </button>
+      {isOpen && (
+        <div
+          id="catalog-sort-options"
+          role="listbox"
+          aria-labelledby="catalog-sort-label"
+          className="absolute right-0 top-full z-30 mt-2 w-full overflow-hidden rounded-[10px] border border-[#444444] bg-[#1a1a1a] p-1 shadow-xl"
+        >
+          {SORT_OPTIONS.map((option, index) => {
+            const isSelected = option.value === value
+            const isActive = index === activeIndex
+
+            return (
+              <div
+                key={option.value}
+                data-sort-option={index}
+                role="option"
+                aria-selected={isSelected}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => selectOption(index)}
+                onKeyDown={(event) => handleOptionKeyDown(event, index)}
+                onMouseMove={() => setActiveIndex(index)}
+                className={`cursor-pointer rounded-md px-3 py-2 text-sm outline-none ${
+                  isActive
+                    ? 'bg-[#FFD400] text-[#111111]'
+                    : isSelected
+                      ? 'bg-[#D71920] text-white'
+                      : 'text-white hover:bg-[#FFD400] hover:text-[#111111]'
+                }`}
+              >
+                {option.label}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
 
 function getPriceError(minPrice, maxPrice) {
   if (minPrice && !/^\d+$/.test(minPrice)) {
@@ -159,12 +306,12 @@ export default function CatalogPage() {
 
   return (
     <div className="design-rise space-y-8 py-2">
-      <section className="design-gradient-shift relative isolate overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8141B] via-[#D71920] to-[#F0561E] p-6 text-white shadow-sm sm:p-8">
+      <section className="design-gradient-shift relative isolate overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8141B] via-[#D71920] to-[#F0561E] p-4 text-white shadow-sm sm:p-5">
         <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-14 h-60 w-60 rounded-full bg-white/15" />
         <div className="relative">
-          <div className="mb-2 text-sm text-white/80">Accueil · Tous les produits</div>
-          <h1 className="text-3xl font-extrabold text-white sm:text-4xl">Tous les produits</h1>
-          <p className="mt-2 max-w-2xl text-sm text-white/90 sm:text-base">
+          <div className="mb-1 text-sm text-white/80">Accueil · Tous les produits</div>
+          <h1 className="text-2xl font-extrabold text-white sm:text-3xl">Tous les produits</h1>
+          <p className="mt-1 max-w-2xl text-sm text-white/90 sm:text-base">
             Recherchez et filtrez les fournitures pour trouver le produit qui vous convient.
           </p>
         </div>
@@ -332,18 +479,11 @@ export default function CatalogPage() {
                 {result.meta ? `${result.meta.total} produit${result.meta.total === 1 ? '' : 's'}` : 'Résultats'}
               </div>
               <div className="flex items-center gap-3">
-                <label htmlFor="catalog-sort" className="text-sm font-medium text-[#111111]">Trier :</label>
-                <select
-                  id="catalog-sort"
+                <span id="catalog-sort-label" className="text-sm font-medium text-[#111111]">Trier :</span>
+                <SortSelect
                   value={sortBy}
-                  onChange={(event) => updateParams({ sort: event.target.value, page: 1 })}
-                  className="min-h-[46px] rounded-[10px] border border-[#E6E1D8] bg-white px-3 py-2 text-sm text-[#111111] outline-none focus:border-[#D71920] focus:ring-2 focus:ring-[#FFD400]/60 sm:w-60"
-                >
-                  <option value="newest">Plus récents</option>
-                  <option value="price_asc">Prix croissant</option>
-                  <option value="price_desc">Prix décroissant</option>
-                  <option value="name">Nom</option>
-                </select>
+                  onChange={(sort) => updateParams({ sort, page: 1 })}
+                />
               </div>
             </div>
           </div>
