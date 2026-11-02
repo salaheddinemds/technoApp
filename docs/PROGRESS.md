@@ -9,10 +9,10 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T26 terminée sur `salah-dev`, en attente de relecture et fusion dans `main`
-- Dernière séance : tableau de bord admin livré avec liste, recherche, suppression confirmée et gestion des états d'interface
-- Prochain pas : ouvrir la pull request T26 ; après fusion, commencer T27
-- Bloquants : aucun ; T26 doit encore être relue et fusionnée avant d'être cochée
+- En cours : T27 implémentée sur `salah-dev`, changements frontend à tester, committer et faire relire
+- Dernière séance : formulaire admin d'ajout/modification avec catégories, marques, caractéristiques et upload de photos
+- Prochain pas : tester T27 avec Cloudinary, committer, ouvrir la pull request puis attendre la relecture
+- Bloquants : aucun ; T27 reste décochée jusqu'à sa fusion dans `main`
 
 ### Samad
 - En cours : T24 terminée ; prochaine tâche : T31 (référencement et vitesse)
@@ -33,6 +33,14 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
 
 ## Journal de Salah (le plus récent en haut)
+
+### 2026-11-02
+- Fait : T27 implémentée avec les pages d'ajout et de modification d'un produit, les routes admin protégées et les appels API associés.
+- Fait : formulaire avec nom, prix, stock, catégorie, marque, description, caractéristiques JSON et sélection de photos.
+- Fait : ajout et suppression des photos existantes ; après l'enregistrement, retour automatique au tableau de bord.
+- Corrigé : un échec Cloudinary n'empêche plus l'enregistrement du produit ni la redirection ; un avertissement est affiché.
+- Vérifié : depuis `frontend/`, `npm run lint`, `npm run build` et `git diff --check` réussissent.
+- À faire : tester l'upload avec les identifiants Cloudinary locaux, committer les changements et ouvrir la PR T27.
 
 ### 2026-11-01
 - Fait : T26 implémentée avec la liste des produits admin, la recherche par nom et la suppression avec confirmation.
