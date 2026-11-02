@@ -109,6 +109,57 @@ export async function getAdminProducts(params = {}) {
   return { products: payload.data, meta: payload.meta }
 }
 
+export async function getAdminProduct(productId) {
+  const payload = await request(`/admin/products/${productId}`)
+
+  if (!payload.data || typeof payload.data !== 'object') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
+async function saveAdminProduct(path, method, product) {
+  const payload = await request(path, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(product),
+  })
+
+  if (!payload.data || typeof payload.data !== 'object') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
+export function createAdminProduct(product) {
+  return saveAdminProduct('/admin/products', 'POST', product)
+}
+
+export function updateAdminProduct(productId, product) {
+  return saveAdminProduct(`/admin/products/${productId}`, 'PUT', product)
+}
+
+export async function uploadAdminProductImages(productId, files) {
+  const formData = new FormData()
+  files.forEach((file) => formData.append('images', file))
+  const payload = await request(`/admin/products/${productId}/images`, {
+    method: 'POST',
+    body: formData,
+  })
+
+  if (!Array.isArray(payload.data)) {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
+export async function deleteAdminImage(imageId) {
+  await request(`/admin/images/${imageId}`, { method: 'DELETE' })
+}
+
 export async function deleteAdminProduct(productId) {
   await request(`/admin/products/${productId}`, { method: 'DELETE' })
 }

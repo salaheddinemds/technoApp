@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link, useLocation, useOutletContext } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import LoadingState from '../../components/ui/LoadingState'
@@ -7,6 +7,7 @@ import { deleteAdminProduct, getAdminProducts } from '../../services/api'
 
 export default function AdminHomePage() {
   const { admin } = useOutletContext()
+  const location = useLocation()
   const [result, setResult] = useState({
     status: 'loading',
     products: [],
@@ -80,9 +81,14 @@ export default function AdminHomePage() {
           <h1 className="mt-2 text-3xl font-extrabold text-[#111111]">Tableau de bord</h1>
           <p className="mt-2 text-sm text-[#5B5B5B]">Bonjour {admin.email}, gérez les produits du catalogue.</p>
         </div>
-        <span className="text-sm text-[#5B5B5B]">
-          {result.products.length} produit{result.products.length > 1 ? 's' : ''}
-        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm text-[#5B5B5B]">
+            {result.products.length} produit{result.products.length > 1 ? 's' : ''}
+          </span>
+          <Link to="/admin/products/new" className="inline-flex min-h-[40px] items-center rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-4 py-2 text-xs font-bold uppercase text-white">
+            Ajouter un produit
+          </Link>
+        </div>
       </header>
 
       {result.error && (
@@ -99,6 +105,21 @@ export default function AdminHomePage() {
             >
               Réessayer
             </Button>
+          )}
+        </div>
+      )}
+
+      {(location.state?.message || location.state?.warning) && (
+        <div className="space-y-2">
+          {location.state.message && (
+            <div role="status" className="rounded-xl border border-[#A9D8B9] bg-[#F0FFF4] p-4 text-sm text-[#287B4D]">
+              {location.state.message}
+            </div>
+          )}
+          {location.state.warning && (
+            <div role="alert" className="rounded-xl border border-[#E7A39C] bg-[#FFF1EF] p-4 text-sm text-[#8F251D]">
+              {location.state.warning}
+            </div>
           )}
         </div>
       )}
@@ -159,6 +180,12 @@ export default function AdminHomePage() {
                     </td>
                     <td className="px-3 py-4 text-right">
                       <div className="flex justify-end gap-2">
+                        <Link
+                          to={`/admin/products/${product.id}/edit`}
+                          className="inline-flex min-h-[40px] items-center rounded-[10px] border border-[#E6E1D8] bg-white px-3 py-2 text-xs font-bold uppercase text-[#111111]"
+                        >
+                          Modifier
+                        </Link>
                         <Link
                           to={`/produits/${product.slug}`}
                           className="inline-flex min-h-[40px] items-center rounded-[10px] border border-[#E6E1D8] bg-white px-3 py-2 text-xs font-bold uppercase text-[#111111]"
