@@ -45,7 +45,7 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T25** Page de connexion admin, routes protégées, mémorisation de la session — Salah · 2 j · après : T21
 - [x] **T26** Tableau de bord : liste des produits, recherche, suppression avec confirmation — Salah · 2 j · après : T22, T25
 - [x] **T27** Formulaire d'ajout et de modification d'un produit (champs, catégorie, marque, photos) — Salah · 3 j · après : T22, T24
-- [ ] **T28** Écrans de gestion des catégories et des marques : liste, ajout, suppression — Salah · 2 j · après : T23, T25
+- [x] **T28** Écrans de gestion des catégories et des marques : liste, ajout, suppression — Salah · 2 j · après : T23, T25
 
 ## Phase 4 — Qualité et finitions (Salah 5 j · Samad 3,5 j)
 
