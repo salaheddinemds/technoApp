@@ -9,9 +9,9 @@
 - Avancement détaillé : cases cochées de `TASKS.md`
 
 ### Salah
-- En cours : T28 à commencer après la fusion de T27
-- Dernière séance : formulaire admin d'ajout/modification avec catégories, marques, caractéristiques et upload de photos
-- Prochain pas : commencer les écrans de gestion des catégories et des marques
+- En cours : T29 après la relecture de T28
+- Dernière séance : écrans admin de gestion des catégories et des marques terminés et poussés sur `salah-dev`
+- Prochain pas : faire relire et fusionner la pull request T28, puis commencer T29
 - Bloquants : aucun
 
 ### Samad
@@ -33,6 +33,13 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 - Services à créer : Neon, Cloudinary, Render, Firebase Hosting
 
 ## Journal de Salah (le plus récent en haut)
+
+### 2026-11-04
+- Fait : T28 implémentée avec la liste, l'ajout et la suppression des catégories et des marques.
+- Fait : route protégée `/admin/categories-marques` et appels API admin ajoutés ; les erreurs de doublon et de suppression d'une ressource non vide sont affichées.
+- Vérifié : `npm run lint`, `npm run build` et `git diff --check` réussissent depuis `frontend/`.
+- Commit : `15a07d8 feat(admin): add category and brand management`, poussé sur `salah-dev`.
+- Prochain pas : faire relire et fusionner la pull request T28.
 
 ### 2026-11-02
 - Fait : T27 implémentée avec les pages d'ajout et de modification d'un produit, les routes admin protégées et les appels API associés.
