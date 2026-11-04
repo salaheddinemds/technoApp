@@ -11,6 +11,7 @@ import RequireAdmin from './components/admin/RequireAdmin.jsx'
 import AdminHomePage from './pages/admin/AdminHomePage.jsx'
 import AdminLoginPage from './pages/admin/AdminLoginPage.jsx'
 import AdminProductFormPage from './pages/admin/AdminProductFormPage.jsx'
+import AdminTaxonomyPage from './pages/admin/AdminTaxonomyPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="admin" element={<AdminHomePage />} />
             <Route path="admin/products/new" element={<AdminProductFormPage />} />
             <Route path="admin/products/:id/edit" element={<AdminProductFormPage />} />
+            <Route path="admin/categories-marques" element={<AdminTaxonomyPage />} />
           </Route>
           <Route
             path="*"
