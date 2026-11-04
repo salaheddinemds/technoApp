@@ -85,9 +85,14 @@ export default function AdminHomePage() {
           <span className="text-sm text-[#5B5B5B]">
             {result.products.length} produit{result.products.length > 1 ? 's' : ''}
           </span>
-          <Link to="/admin/products/new" className="inline-flex min-h-[40px] items-center rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-4 py-2 text-xs font-bold uppercase text-white">
-            Ajouter un produit
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link to="/admin/categories-marques" className="inline-flex min-h-[40px] items-center rounded-[10px] border border-[#E6E1D8] bg-white px-4 py-2 text-xs font-bold uppercase text-[#111111]">
+              Catégories et marques
+            </Link>
+            <Link to="/admin/products/new" className="inline-flex min-h-[40px] items-center rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-4 py-2 text-xs font-bold uppercase text-white">
+              Ajouter un produit
+            </Link>
+          </div>
         </div>
       </header>
 

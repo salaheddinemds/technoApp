@@ -184,6 +184,36 @@ export async function getBrands() {
   return payload.data
 }
 
+async function createAdminTaxonomy(path, name) {
+  const payload = await request(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name }),
+  })
+
+  if (!payload.data || typeof payload.data !== 'object') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
+export function createAdminCategory(name) {
+  return createAdminTaxonomy('/admin/categories', name)
+}
+
+export function createAdminBrand(name) {
+  return createAdminTaxonomy('/admin/brands', name)
+}
+
+export async function deleteAdminCategory(categoryId) {
+  await request(`/admin/categories/${categoryId}`, { method: 'DELETE' })
+}
+
+export async function deleteAdminBrand(brandId) {
+  await request(`/admin/brands/${brandId}`, { method: 'DELETE' })
+}
+
 export async function getProductBySlug(slug) {
   const payload = await request(`/products/${encodeURIComponent(slug)}`)
   return payload.data
