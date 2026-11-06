@@ -30,11 +30,21 @@ async function request(path, options = {}) {
   const payload = await response.json().catch(() => null)
 
   if (!response.ok) {
-    const message = SERVICE_UNAVAILABLE_STATUSES.has(response.status)
+    const baseMessage = SERVICE_UNAVAILABLE_STATUSES.has(response.status)
       ? SERVICE_UNAVAILABLE_MESSAGE
       : payload?.error?.message ?? `L'API a répondu avec le statut ${response.status}.`
+    const details = Array.isArray(payload?.error?.details)
+      ? payload.error.details
+        .filter((detail) => detail && typeof detail.field === 'string' && typeof detail.message === 'string')
+        .map((detail) => `${detail.field} : ${detail.message}`)
+      : []
+    const message = details.length > 0
+      ? `${baseMessage} ${details.join(' ')}`
+      : baseMessage
     const error = new Error(message)
     error.status = response.status
+    error.code = payload?.error?.code
+    error.details = payload?.error?.details
     throw error
   }
 

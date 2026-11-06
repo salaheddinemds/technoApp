@@ -32,10 +32,20 @@ function TaxonomySection({ type, items, onAdd, onDelete, deletingId }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
+    const trimmedName = name.trim()
+
+    if (!trimmedName || trimmedName.length > 60) {
+      setState({
+        status: 'error',
+        error: `Le nom de la ${labels.singular} doit contenir de 1 à 60 caractères.`,
+      })
+      return
+    }
+
     setState({ status: 'loading', error: null })
 
     try {
-      await onAdd(name.trim())
+      await onAdd(trimmedName)
       setName('')
       setState({ status: 'success', error: null })
     } catch (error) {
