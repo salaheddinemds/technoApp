@@ -13,7 +13,11 @@ import healthRouter from './routes/health.routes.js';
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: config.corsOrigin }));
+app.use(cors({
+  origin: (requestOrigin, callback) => {
+    callback(null, !requestOrigin || requestOrigin === config.corsOrigin);
+  }
+}));
 app.use(express.json());
 
 app.use('/api/health', healthRouter);
