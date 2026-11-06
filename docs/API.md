@@ -101,6 +101,7 @@ Exemple :
 | Méthode | Route | Accès |
 | --- | --- | --- |
 | POST | `/api/auth/login` | Public |
+| POST | `/api/auth/signup` | Public avec code d'inscription |
 | GET | `/api/auth/me` | Jeton JWT requis |
 
 Le compte est créé par `npm run db:create-admin` avec `ADMIN_EMAIL` et
@@ -127,6 +128,23 @@ Le frontend envoie ensuite `Authorization: Bearer <token>` sur chaque route
 
 ```json
 { "data": { "id": 1, "email": "admin@exemple.dz" } }
+```
+
+`POST /api/auth/signup` reçoit `{ "email", "password", "name", "firstName",
+"phone", "signupCode" }`. Le code doit correspondre à `ADMIN_SIGNUP_CODE` dans
+`backend/.env`, et le mot de passe doit contenir au moins 12 caractères. La
+réponse 201 ne renvoie jamais le mot de passe :
+
+```json
+{
+  "data": {
+    "id": 2,
+    "email": "admin@exemple.dz",
+    "name": "Nom",
+    "firstName": "Prénom",
+    "phone": "+213550070708"
+  }
+}
 ```
 
 ## Routes admin

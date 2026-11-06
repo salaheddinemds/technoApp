@@ -10,6 +10,7 @@ import ProductDetailPage from './pages/client/ProductDetailPage.jsx'
 import RequireAdmin from './components/admin/RequireAdmin.jsx'
 import AdminHomePage from './pages/admin/AdminHomePage.jsx'
 import AdminLoginPage from './pages/admin/AdminLoginPage.jsx'
+import AdminSignupPage from './pages/admin/AdminSignupPage.jsx'
 import AdminProductFormPage from './pages/admin/AdminProductFormPage.jsx'
 import AdminTaxonomyPage from './pages/admin/AdminTaxonomyPage.jsx'
 
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="produits/:slug" element={<ProductDetailPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="admin/login" element={<AdminLoginPage />} />
+          <Route path="admin/signup" element={<AdminSignupPage />} />
           <Route element={<RequireAdmin />}>
             <Route path="admin" element={<AdminHomePage />} />
             <Route path="admin/products/new" element={<AdminProductFormPage />} />

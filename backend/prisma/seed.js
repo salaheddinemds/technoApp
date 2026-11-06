@@ -396,7 +396,13 @@ async function main() {
       await transaction.admin.upsert({
         where: { email: adminEmail },
         update: { passwordHash },
-        create: { email: adminEmail, passwordHash }
+        create: {
+          email: adminEmail,
+          passwordHash,
+          name: 'Administrateur',
+          firstName: 'Principal',
+          phone: 'Non renseigné'
+        }
       });
 
       const categoryIds = new Map();

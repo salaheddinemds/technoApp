@@ -61,6 +61,9 @@ model Admin {
   id           Int    @id @default(autoincrement())
   email        String @unique
   passwordHash String @map("password_hash")
+  name         String
+  firstName    String @map("first_name")
+  phone        String
 
   @@map("admins")
 }
