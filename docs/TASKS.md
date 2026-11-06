@@ -49,8 +49,8 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 
 ## Phase 4 — Qualité et finitions (Salah 5 j · Samad 3,5 j)
 
-- [ ] **T29** Sécurité de base : CORS, en-têtes Helmet, limite de requêtes, secrets dans le fichier .env — Salah · 1,5 j · après : T24
-- [ ] **T30** Messages d'erreur clairs côté API et interface, page 404, validation des formulaires — Salah · 1,5 j · après : T28
+- [x] **T29** Sécurité de base : CORS, en-têtes Helmet, limite de requêtes, secrets dans le fichier .env — Salah · 1,5 j · après : T24
+- [x] **T30** Messages d'erreur clairs côté API et interface, page 404, validation des formulaires — Salah · 1,5 j · après : T28
 - [ ] **T31** Référencement et vitesse : titres et descriptions de page, URLs lisibles, images allégées, favicon — Samad · 1,5 j · après : T20
 - [ ] **T32** Tests manuels croisés avec une liste de contrôle, puis corrections — Les deux · 2 j · après : T29, T30, T31
 

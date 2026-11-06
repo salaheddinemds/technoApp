@@ -39,7 +39,13 @@ try {
       console.info(`Mot de passe admin réinitialisé pour ${email}.`);
     } else {
       const admin = await prisma.admin.create({
-        data: { email, passwordHash },
+        data: {
+          email,
+          passwordHash,
+          name: 'Administrateur',
+          firstName: 'Principal',
+          phone: 'Non renseigné'
+        },
         select: { id: true, email: true }
       });
       console.info(`Compte admin créé : ${admin.email} (id ${admin.id}).`);

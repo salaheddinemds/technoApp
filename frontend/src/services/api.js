@@ -76,6 +76,20 @@ export async function loginAdmin(email, password) {
   return payload.data
 }
 
+export async function signupAdmin({ email, password, name, firstName, phone, signupCode }) {
+  const payload = await request('/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password, name, firstName, phone, signupCode }),
+  })
+
+  if (!payload.data || typeof payload.data.email !== 'string') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
 export async function getCurrentAdmin() {
   const payload = await request('/auth/me')
 
