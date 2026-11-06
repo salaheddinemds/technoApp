@@ -111,6 +111,37 @@ export default function AdminProductFormPage() {
     event.preventDefault()
     setState({ status: 'success', error: null })
 
+    const name = form.name.trim()
+    const price = Number(form.price)
+    const stock = Number(form.stock)
+    const categoryId = Number(form.categoryId)
+    const brandId = Number(form.brandId)
+    const validationErrors = []
+
+    if (name.length < 1 || name.length > 120) {
+      validationErrors.push('Le nom doit contenir de 1 à 120 caractères.')
+    }
+    if (!Number.isSafeInteger(price) || price < 0 || price > 2147483647) {
+      validationErrors.push('Le prix doit être un entier entre 0 et 2 147 483 647.')
+    }
+    if (!Number.isSafeInteger(stock) || stock < 0 || stock > 2147483647) {
+      validationErrors.push('Le stock doit être un entier entre 0 et 2 147 483 647.')
+    }
+    if (!Number.isSafeInteger(categoryId) || categoryId < 1) {
+      validationErrors.push('Choisissez une catégorie.')
+    }
+    if (!Number.isSafeInteger(brandId) || brandId < 1) {
+      validationErrors.push('Choisissez une marque.')
+    }
+    if (form.description.length > 5000) {
+      validationErrors.push('La description doit contenir 5 000 caractères au maximum.')
+    }
+
+    if (validationErrors.length > 0) {
+      setState({ status: 'success', error: validationErrors.join(' ') })
+      return
+    }
+
     let specs
     try {
       specs = JSON.parse(form.specs || '{}')
@@ -130,11 +161,11 @@ export default function AdminProductFormPage() {
     }
 
     const productData = {
-      name: form.name.trim(),
-      price: Number(form.price),
-      stock: Number(form.stock),
-      categoryId: Number(form.categoryId),
-      brandId: Number(form.brandId),
+      name,
+      price,
+      stock,
+      categoryId,
+      brandId,
       description: form.description.trim(),
       specs,
     }
