@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { getOptimizedImageUrl } from '../config/image'
 
 function formatPrice(value) {
   return new Intl.NumberFormat('fr-DZ', {
@@ -11,6 +12,7 @@ function formatPrice(value) {
 
 export default function ProductCard({ product, tag = 'Nouveau' }) {
   const [failedImage, setFailedImage] = useState(null)
+  const imageUrl = getOptimizedImageUrl(product.image, 480)
 
   return (
     <article className="design-lift group flex h-full flex-col rounded-2xl border border-[#E6E1D8] bg-white p-3.5 shadow-sm">
@@ -18,12 +20,14 @@ export default function ProductCard({ product, tag = 'Nouveau' }) {
         <div className="absolute left-2 top-2 z-10 rounded-full bg-gradient-to-br from-[#FFD400] to-[#FF9F1C] px-2.5 py-1 text-[10px] font-bold uppercase text-[#111111]">
           {tag}
         </div>
-        {product.image && failedImage !== product.image ? (
+        {imageUrl && failedImage !== imageUrl ? (
           <img
-            src={product.image}
+            src={imageUrl}
             alt=""
             aria-hidden="true"
-            onError={() => setFailedImage(product.image)}
+            onError={() => setFailedImage(imageUrl)}
+            loading="lazy"
+            decoding="async"
             className="h-40 w-full object-cover"
           />
         ) : (

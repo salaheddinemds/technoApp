@@ -1,12 +1,75 @@
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import technoLogo from './assets/techno-logo.svg'
 import homeContent from './config/homeContent'
+import PageMetadata from './components/PageMetadata'
+
+const pageMetadata = {
+  '/': {
+    title: 'Accueil — Techno Stationery',
+    description: 'Fournitures scolaires, bureautique et loisirs créatifs fabriqués en Algérie. Découvrez les catégories et les derniers produits.',
+  },
+  '/produits': {
+    title: 'Tous les produits — Techno Stationery',
+    description: 'Parcourez le catalogue Techno Stationery et trouvez vos produits par catégorie, marque et prix.',
+  },
+  '/contact': {
+    title: 'Contact — Techno Stationery',
+    description: 'Contactez Techno Stationery à Alger pour toute question sur nos produits et leur disponibilité.',
+  },
+  '/admin/login': {
+    title: 'Connexion administrateur — Techno Stationery',
+    description: 'Connexion à l’espace d’administration Techno Stationery.',
+  },
+  '/admin/signup': {
+    title: 'Inscription administrateur — Techno Stationery',
+    description: 'Création d’un accès administrateur Techno Stationery.',
+  },
+  '/admin': {
+    title: 'Gestion des produits — Techno Stationery',
+    description: 'Administration du catalogue de produits Techno Stationery.',
+  },
+  '/admin/products/new': {
+    title: 'Ajouter un produit — Techno Stationery',
+    description: 'Ajout d’un produit au catalogue Techno Stationery.',
+  },
+  '/admin/categories-marques': {
+    title: 'Catégories et marques — Techno Stationery',
+    description: 'Gestion des catégories et marques du catalogue Techno Stationery.',
+  },
+}
+
+function getPageMetadata(pathname) {
+  if (Object.hasOwn(pageMetadata, pathname)) {
+    return pageMetadata[pathname]
+  }
+
+  if (pathname.startsWith('/produits/')) {
+    return {
+      title: 'Produit — Techno Stationery',
+      description: 'Consultez les informations et la disponibilité de ce produit dans le catalogue Techno Stationery.',
+    }
+  }
+
+  if (pathname.startsWith('/admin/products/') && pathname.endsWith('/edit')) {
+    return {
+      title: 'Modifier un produit — Techno Stationery',
+      description: 'Modification d’un produit du catalogue Techno Stationery.',
+    }
+  }
+
+  return {
+    title: 'Page introuvable — Techno Stationery',
+    description: 'La page demandée est introuvable dans le catalogue Techno Stationery.',
+  }
+}
 
 function App() {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   return (
     <div className="min-h-screen bg-[#F7F5F0] text-[#111111]">
+      <PageMetadata {...getPageMetadata(pathname)} />
       <header className="sticky top-0 z-50 shadow-sm">
         <div className="bg-[#111111] text-white">
           <div className="mx-auto flex max-w-[1560px] flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-1.5 sm:px-6 lg:px-8">

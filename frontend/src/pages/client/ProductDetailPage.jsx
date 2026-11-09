@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import LoadingState from '../../components/ui/LoadingState'
+import PageMetadata from '../../components/PageMetadata'
+import { getOptimizedImageUrl } from '../../config/image'
 import { getProductBySlug } from '../../services/api'
 
 function formatPrice(value) {
@@ -84,15 +86,26 @@ export default function ProductDetailPage() {
   const image = selectedImage ?? product.images[0]
   const specifications = Object.entries(product.specs ?? {})
   const contactMessage = encodeURIComponent(`Bonjour, je souhaite obtenir des informations sur ${product.name}.`)
+  const productDescription = product.description?.replace(/\s+/g, ' ').trim().slice(0, 160)
 
   return (
     <div className="space-y-8">
+      <PageMetadata
+        title={`${product.name} — Techno Stationery`}
+        description={productDescription || `Découvrez ${product.name} et consultez sa disponibilité dans le catalogue Techno Stationery.`}
+      />
       <div className="rounded-[18px] border border-[#d7d0c5] bg-[#f3efe9] p-4 sm:p-6">
         <div className="mb-4 break-words text-sm text-[#4d4d4d]">Accueil · {product.category.name} · {product.name}</div>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="min-w-0 rounded-[14px] border border-[#d7d0c5] bg-[#eae3da] p-3 sm:p-4">
             {image ? (
-              <img src={image.url} alt={product.name} className="h-[260px] w-full rounded-xl object-cover sm:h-[360px] lg:h-[420px]" />
+              <img
+                src={getOptimizedImageUrl(image.url, 1200)}
+                alt={product.name}
+                fetchPriority="high"
+                decoding="async"
+                className="h-[260px] w-full rounded-xl object-cover sm:h-[360px] lg:h-[420px]"
+              />
             ) : (
               <div className="flex h-[260px] items-center justify-center rounded-xl bg-[#dfd7cf] text-sm text-[#5d5d5d] sm:h-[360px] lg:h-[420px]">
                 Aucune photo disponible
@@ -106,7 +119,13 @@ export default function ProductDetailPage() {
                   onClick={() => setSelectedImage(productImage)}
                   className={`h-14 w-14 overflow-hidden rounded-md border-2 bg-[#f0ece7] ${selectedImage?.id === productImage.id ? 'border-[#ef3b2d]' : 'border-[#d7d0c5]'}`}
                 >
-                  <img src={productImage.url} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={getOptimizedImageUrl(productImage.url, 160)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
                 </button>
               ))}
             </div>
