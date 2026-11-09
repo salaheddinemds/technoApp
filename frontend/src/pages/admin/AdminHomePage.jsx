@@ -3,6 +3,7 @@ import { Link, useLocation, useOutletContext } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import LoadingState from '../../components/ui/LoadingState'
+import { getOptimizedImageUrl } from '../../config/image'
 import { deleteAdminProduct, getAdminProducts } from '../../services/api'
 
 export default function AdminHomePage() {
@@ -166,7 +167,13 @@ export default function AdminHomePage() {
                     <td className="px-3 py-4">
                       <div className="flex items-center gap-3">
                         {product.image ? (
-                          <img src={product.image} alt="" className="h-12 w-12 rounded-lg object-cover" />
+                          <img
+                            src={getOptimizedImageUrl(product.image, 96)}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            className="h-12 w-12 rounded-lg object-cover"
+                          />
                         ) : (
                           <div className="h-12 w-12 rounded-lg bg-[#F3EFE7]" aria-hidden="true" />
                         )}
