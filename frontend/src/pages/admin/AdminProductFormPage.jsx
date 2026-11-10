@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import LoadingState from '../../components/ui/LoadingState'
+import { getOptimizedImageUrl } from '../../config/image'
 import {
   createAdminProduct,
   deleteAdminImage,
@@ -268,7 +269,13 @@ export default function AdminProductFormPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {images.map((image) => (
                 <div key={image.id} className="relative">
-                  <img src={image.url} alt="Photo du produit" className="aspect-square w-full rounded-lg object-cover" />
+                  <img
+                    src={getOptimizedImageUrl(image.url, 640)}
+                    alt="Photo du produit"
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-square w-full rounded-lg object-cover"
+                  />
                   <Button type="button" variant="stationerySecondary" onClick={() => handleDeleteImage(image)} disabled={deletingImageId === image.id} className="absolute bottom-2 left-2 min-h-0 px-2 py-1 text-[10px] text-[#C8141B]">
                     {deletingImageId === image.id ? '...' : 'Supprimer'}
                   </Button>
@@ -279,7 +286,7 @@ export default function AdminProductFormPage() {
           <Input label="Ajouter des photos" name="images" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={handleFilesChange} />
           {previews.length > 0 && (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {previews.map(({ file, url }) => <img key={`${file.name}-${file.lastModified}`} src={url} alt={`Aperçu de ${file.name}`} className="aspect-square w-full rounded-lg object-cover" />)}
+              {previews.map(({ file, url }) => <img key={`${file.name}-${file.lastModified}`} src={url} alt={`Aperçu de ${file.name}`} loading="lazy" decoding="async" className="aspect-square w-full rounded-lg object-cover" />)}
             </div>
           )}
         </section>

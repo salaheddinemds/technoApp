@@ -15,10 +15,11 @@
 - Bloquants : aucun
 
 ### Samad
-- En cours : T24 terminée ; prochaine tâche : T31 (référencement et vitesse)
-- Dernière séance : 2026-10-31, upload multipart, validation des images et nettoyage Cloudinary ajoutés ; 6 tests automatisés réussis
-- Prochain pas : commencer T31
-- À noter : l'intégration avec un compte Cloudinary réel reste à vérifier
+- En cours : T31 implémentée et vérifiée, en attente de relecture et de fusion
+- Dernière séance : 2026-11-09, titres et descriptions par page, images Cloudinary optimisées et favicon Techno Stationery vérifiés ; lint et build réussis
+- Prochain pas : démarrer PostgreSQL local pour vérifier le catalogue, puis committer et faire relire la PR T31
+- Bloquant : PostgreSQL local est arrêté ; la vérification manuelle des routes catalogue reste à faire
+- À noter : `npm install` dans `backend/` a restauré `express-rate-limit` ; l'intégration avec un compte Cloudinary réel reste à vérifier
 
 ## À retenir (10 lignes au maximum)
 
@@ -101,6 +102,14 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 
 ## Journal de Samad (le plus récent en haut)
+
+### 2026-11-09
+- Fait : implémentation T31 terminée sur `T31-seo-speed` avec titres et descriptions propres aux pages, descriptions produit, optimisation Cloudinary, chargement différé et URLs produit lisibles.
+- Fait : favicon remplacé par une copie exacte du logo Techno Stationery ; `/favicon.svg` sert le SVG avec HTTP 200.
+- Vérifié : `npm run lint`, `npm run build`, les transformations d'URL et `git diff --check` réussissent depuis `frontend/`.
+- Dépanné : dépendances backend réinstallées ; `express-rate-limit` est présent.
+- À vérifier : l'API répond 500 sur le catalogue car PostgreSQL local ne tourne pas ; le démarrage du service nécessite une autorisation.
+- Prochain pas : démarrer PostgreSQL et tester le catalogue, puis committer T31 et ouvrir une pull request pour relecture et fusion.
 
 ### 2026-10-31
 - Fait : T24 cochée ; implémentation de l'upload d'images vers Cloudinary, des contrôles de format et de taille, et du nettoyage lors des suppressions.
