@@ -7,7 +7,7 @@
 - Un seul dépôt GitHub avec deux dossiers, `frontend` et `backend`, plus `docs` et `.github`. `main` ne reçoit que du code relu.
 - Une branche par tâche, nommée avec son identifiant : `T19-catalogue`. Une pull request relue par l'autre avant la fusion.
 - Commits : `type(portée): message` en anglais, avec `feat`, `fix`, `docs`, `chore`, `refactor` ou `test`. Exemple : `feat(catalogue): add price filter`. Petits commits, souvent.
-- Chaque tâche T01 à T38 est une carte dans GitHub Projects (À faire, En cours, Terminé), mise à jour au début et à la fin du travail.
+- Chaque tâche T01 à T40 est une carte dans GitHub Projects (À faire, En cours, Terminé), mise à jour au début et à la fin du travail.
 - Avant de commencer : `git pull` sur `main`, puis créer la branche de la tâche.
 
 ## Une tâche est terminée quand
@@ -39,7 +39,7 @@
 
 - Pour chaque tâche : lire ou regarder le concept 30 minutes au plus, le coder, puis l'expliquer à l'autre en trois phrases.
 - Face à un bug : relire le message d'erreur en entier, chercher 30 minutes, puis demander à l'autre avant de chercher plus longtemps.
-- Noter dans le README ce qu'on a appris à chaque phase (T38).
+- Noter dans le README ce qu'on a appris à chaque phase (T40).
 - Une nouvelle idée ? La noter dans « Plus tard » de `TASKS.md` et n'y toucher qu'après la phase 5.
 
 ## Risques et parades

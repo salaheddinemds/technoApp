@@ -1,7 +1,9 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import technoLogo from './assets/techno-logo.svg'
 import homeContent from './config/homeContent'
 import PageMetadata from './components/PageMetadata'
+import { clearAdminToken, getAdminToken } from './services/auth'
 
 const pageMetadata = {
   '/': {
@@ -36,6 +38,10 @@ const pageMetadata = {
     title: 'Catégories et marques — Techno Stationery',
     description: 'Gestion des catégories et marques du catalogue Techno Stationery.',
   },
+  '/admin/profile': {
+    title: 'Mon profil — Techno Stationery',
+    description: 'Consultation et modification du profil administrateur Techno Stationery.',
+  },
 }
 
 function getPageMetadata(pathname) {
@@ -66,6 +72,33 @@ function getPageMetadata(pathname) {
 function App() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const profileMenuRef = useRef(null)
+  const isAuthenticated = Boolean(getAdminToken())
+
+  useEffect(() => {
+    if (!isProfileMenuOpen) {
+      return undefined
+    }
+
+    function closeOnOutsideClick(event) {
+      if (!profileMenuRef.current?.contains(event.target)) {
+        setIsProfileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
+  }, [isProfileMenuOpen])
+
+  function handleLogout() {
+    clearAdminToken()
+    setIsProfileMenuOpen(false)
+    navigate('/admin/login', {
+      replace: true,
+      state: { message: 'Vous êtes déconnecté.' },
+    })
+  }
 
   return (
     <div className="min-h-screen bg-[#F7F5F0] text-[#111111]">
@@ -87,17 +120,75 @@ function App() {
                 </svg>
                 +213 550 07 07 08
               </a>
-              <div aria-label="Espace compte client" className="flex items-center gap-1.5">
-                <span className="inline-flex min-h-7 items-center gap-1 rounded-full border border-white/20 bg-gradient-to-b from-[#292929] to-[#1a1a1a] px-2 text-[9px] font-semibold text-white shadow-[0_3px_8px_rgba(0,0,0,0.3)] transition duration-200 hover:-translate-y-0.5 hover:border-[#FFD400]/70 hover:text-[#FFD400] hover:shadow-[0_5px_12px_rgba(255,212,0,0.16)] sm:min-h-8 sm:gap-1.5 sm:px-2.5 sm:text-xs">
-                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="hidden h-4 w-4 text-[#FFD400] sm:block">
+              <div ref={profileMenuRef} className="relative">
+                <button
+                  type="button"
+                  aria-label="Menu du profil"
+                  aria-haspopup="menu"
+                  aria-expanded={isProfileMenuOpen}
+                  onClick={() => setIsProfileMenuOpen((isOpen) => !isOpen)}
+                  className="inline-flex min-h-8 items-center gap-2 rounded-full border border-white/20 bg-gradient-to-b from-[#292929] to-[#1a1a1a] px-3 text-xs font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.3)] transition hover:-translate-y-0.5 hover:border-[#FFD400]/70 hover:text-[#FFD400] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD400]"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-[#FFD400]">
                     <circle cx="12" cy="8" r="4" />
                     <path d="M5 21a7 7 0 0 1 14 0" />
                   </svg>
-                  <span className="whitespace-nowrap">Se Connecter</span>
-                </span>
-                <span className="inline-flex min-h-7 items-center rounded-full border border-[#FFD400]/50 bg-gradient-to-b from-[#3a3020] to-[#211b12] px-2 text-[9px] font-semibold text-[#FFD400] shadow-[0_3px_8px_rgba(0,0,0,0.3)] transition duration-200 hover:-translate-y-0.5 hover:border-[#FFD400] hover:bg-[#FFD400] hover:text-[#111111] hover:shadow-[0_5px_12px_rgba(255,212,0,0.22)] sm:min-h-8 sm:px-2.5 sm:text-xs">
-                  <span className="whitespace-nowrap">Créer un Compte</span>
-                </span>
+                  <span className="hidden sm:inline">Profil</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" className={`h-3.5 w-3.5 transition-transform ${isProfileMenuOpen ? 'rotate-180' : ''}`}>
+                    <path d="m5 7.5 5 5 5-5" />
+                  </svg>
+                </button>
+                {isProfileMenuOpen && (
+                  <div role="menu" aria-label="Options du profil" className="absolute right-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-[#444444] bg-[#1a1a1a] p-1 shadow-xl">
+                    {isAuthenticated ? (
+                      <>
+                        <Link
+                          to="/admin/profile"
+                          role="menuitem"
+                          onClick={() => setIsProfileMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white hover:bg-[#FFD400] hover:text-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FFD400]"
+                        >
+                          Mon profil
+                        </Link>
+                        <Link
+                          to="/admin"
+                          role="menuitem"
+                          onClick={() => setIsProfileMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white hover:bg-[#FFD400] hover:text-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FFD400]"
+                        >
+                          Tableau de bord
+                        </Link>
+                        <button
+                          type="button"
+                          role="menuitem"
+                          onClick={handleLogout}
+                          className="block w-full rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-[#FFD400] hover:bg-[#D71920] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FFD400]"
+                        >
+                          Déconnexion
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/admin/login"
+                          role="menuitem"
+                          onClick={() => setIsProfileMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white hover:bg-[#FFD400] hover:text-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FFD400]"
+                        >
+                          Se connecter
+                        </Link>
+                        <Link
+                          to="/admin/signup"
+                          role="menuitem"
+                          onClick={() => setIsProfileMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[#FFD400] hover:bg-[#FFD400] hover:text-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FFD400]"
+                        >
+                          Créer un compte
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

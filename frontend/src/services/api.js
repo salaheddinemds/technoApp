@@ -100,6 +100,20 @@ export async function getCurrentAdmin() {
   return payload.data
 }
 
+export async function updateCurrentAdmin(profile) {
+  const payload = await request('/auth/me', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profile),
+  })
+
+  if (!payload.data || typeof payload.data.email !== 'string') {
+    throw new Error("La réponse de l'API est invalide.")
+  }
+
+  return payload.data
+}
+
 function toQueryString(params) {
   const query = new URLSearchParams()
 

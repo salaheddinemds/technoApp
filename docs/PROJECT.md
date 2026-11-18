@@ -28,7 +28,7 @@ Les URL sont proposées (à valider en T08).
 | Client | Accueil | voir les catégories et les derniers produits | `/` | T18 |
 | Client | Catalogue | chercher par mot-clé ; filtrer par catégorie, marque, prix et disponibilité ; trier ; changer de page | `/produits` | T15, T19 |
 | Client | Fiche produit | voir photos, description, caractéristiques et prix ; contacter la marque | `/produits/:slug` | T16 |
-| Admin | Connexion | se connecter avec un e-mail et un mot de passe | `/admin/login` | T21, T25 |
+| Admin | Connexion | se connecter avec un e-mail et un mot de passe | `/admin/login` | T21, T25, T33, T34 |
 | Admin | Produits | lister, chercher et supprimer un article, avec confirmation | `/admin/produits` | T22, T26 |
 | Admin | Formulaire produit | ajouter ou modifier un article : nom, prix, description, caractéristiques, stock, catégorie, marque, photos | `/admin/produits/nouveau`, `/admin/produits/:id/modifier` | T22, T24, T27 |
 | Admin | Catégories et marques | ajouter et supprimer des catégories et des marques | `/admin/categories-marques` | T23, T28 |

@@ -1,6 +1,6 @@
 # Mise en ligne
 
-> Source : plan du 7 octobre 2026. Offres consultées le 7 octobre 2026 ; elles changent souvent : relire les pages liées avant de s'engager. Tâches concernées : T33 à T38.
+> Source : plan du 7 octobre 2026. Offres consultées le 7 octobre 2026 ; elles changent souvent : relire les pages liées avant de s'engager. Tâches concernées : T35 à T40.
 
 ## Deux parcours
 
@@ -23,12 +23,12 @@ Le parcours A met le site en ligne gratuitement et sans moyen de paiement. Il su
 
 ## Checklist par tâche (étapes proposées, à adapter)
 
-- **T33** Base en ligne (Neon) : créer le projet, mettre la chaîne de connexion dans `DATABASE_URL`, appliquer les migrations (`npx prisma migrate deploy`), créer l'admin avec le seed, essayer une sauvegarde manuelle (par exemple avec `pg_dump`).
-- **T34** API (Render ; Cloud Run pour le parcours B) : relier le dépôt (dossier `backend`), définir les commandes de build et de démarrage (par exemple `npm install && npx prisma generate`, puis `npm start`), renseigner les variables (`DATABASE_URL`, `JWT_SECRET`, `CLOUDINARY_*`, `CORS_ORIGIN`), apprendre à lire les journaux.
-- **T35** Frontend (Firebase Hosting) : définir `VITE_API_URL` sur l'adresse de l'API avant `npm run build`, déployer le dossier `dist`, réécrire toutes les adresses vers `index.html` (nécessaire avec React Router), puis mettre l'adresse du site dans `CORS_ORIGIN` côté API.
-- **T36** Nom de domaine et HTTPS, si vous en achetez un.
-- **T37** Saisir les vrais produits (20 à 30) depuis l'admin et corriger ce qui gêne.
-- **T38** README, démonstration et bilan.
+- **T35** Base en ligne (Neon) : créer le projet, mettre la chaîne de connexion dans `DATABASE_URL`, appliquer les migrations (`npx prisma migrate deploy`), créer l'admin avec le seed, essayer une sauvegarde manuelle (par exemple avec `pg_dump`).
+- **T36** API (Render ; Cloud Run pour le parcours B) : relier le dépôt (dossier `backend`), définir les commandes de build et de démarrage (par exemple `npm install && npx prisma generate`, puis `npm start`), renseigner les variables (`DATABASE_URL`, `JWT_SECRET`, `CLOUDINARY_*`, `CORS_ORIGIN`), apprendre à lire les journaux.
+- **T37** Frontend (Firebase Hosting) : définir `VITE_API_URL` sur l'adresse de l'API avant `npm run build`, déployer le dossier `dist`, réécrire toutes les adresses vers `index.html` (nécessaire avec React Router), puis mettre l'adresse du site dans `CORS_ORIGIN` côté API.
+- **T38** Nom de domaine et HTTPS, si vous en achetez un.
+- **T39** Saisir les vrais produits (20 à 30) depuis l'admin et corriger ce qui gêne.
+- **T40** README, démonstration et bilan.
 - Ensuite : déclarer le site dans Google Search Console et soumettre un fichier `sitemap.xml`.
 
 ## Sources

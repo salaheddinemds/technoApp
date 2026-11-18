@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useLocation, useOutletContext } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import LoadingState from '../../components/ui/LoadingState'
 import { getOptimizedImageUrl } from '../../config/image'
+import { clearAdminToken } from '../../services/auth'
 import { deleteAdminProduct, getAdminProducts } from '../../services/api'
 
 export default function AdminHomePage() {
   const { admin } = useOutletContext()
   const location = useLocation()
+  const navigate = useNavigate()
   const [result, setResult] = useState({
     status: 'loading',
     products: [],
@@ -17,6 +19,14 @@ export default function AdminHomePage() {
   const [search, setSearch] = useState('')
   const [deletingId, setDeletingId] = useState(null)
   const [retryCount, setRetryCount] = useState(0)
+
+  function handleLogout() {
+    clearAdminToken()
+    navigate('/admin/login', {
+      replace: true,
+      state: { message: 'Vous êtes déconnecté.' },
+    })
+  }
 
   useEffect(() => {
     let isCurrent = true
@@ -93,6 +103,14 @@ export default function AdminHomePage() {
             <Link to="/admin/products/new" className="inline-flex min-h-[40px] items-center rounded-[10px] bg-gradient-to-br from-[#C8141B] to-[#DC3A17] px-4 py-2 text-xs font-bold uppercase text-white">
               Ajouter un produit
             </Link>
+            <Button
+              type="button"
+              variant="stationerySecondary"
+              onClick={handleLogout}
+              className="min-h-[40px] px-4 py-2 text-xs text-[#C8141B]"
+            >
+              Déconnexion
+            </Button>
           </div>
         </div>
       </header>
