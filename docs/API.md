@@ -103,6 +103,7 @@ Exemple :
 | POST | `/api/auth/login` | Public |
 | POST | `/api/auth/signup` | Public avec code d'inscription |
 | GET | `/api/auth/me` | Jeton JWT requis |
+| PATCH | `/api/auth/me` | Jeton JWT requis |
 
 Le compte est créé par `npm run db:create-admin` avec `ADMIN_EMAIL` et
 `ADMIN_PASSWORD` dans `backend/.env` ; le mot de passe est stocké sous forme
@@ -127,8 +128,20 @@ Le frontend envoie ensuite `Authorization: Bearer <token>` sur chaque route
 `GET /api/auth/me` renvoie :
 
 ```json
-{ "data": { "id": 1, "email": "admin@exemple.dz" } }
+{
+  "data": {
+    "id": 1,
+    "email": "admin@exemple.dz",
+    "name": "Nom",
+    "firstName": "Prénom",
+    "phone": "+213550070708"
+  }
+}
 ```
+
+`PATCH /api/auth/me` modifie les champs `email`, `name`, `firstName` et
+`phone`. Tous les champs sont obligatoires et sont validés comme lors de
+l'inscription. Une adresse e-mail déjà utilisée renvoie `409`.
 
 `POST /api/auth/signup` reçoit `{ "email", "password", "name", "firstName",
 "phone", "signupCode" }`. Le code doit correspondre à `ADMIN_SIGNUP_CODE` dans

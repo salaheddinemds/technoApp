@@ -10,7 +10,7 @@ Le site est une vitrine : les visiteurs parcourent, cherchent et filtrent les pr
 
 | Objectif | Indicateur de réussite |
 | --- | --- |
-| Présenter les produits de la marque en ligne | 20 à 30 produits réels publiés à la mise en ligne (T37) |
+| Présenter les produits de la marque en ligne | 20 à 30 produits réels publiés à la mise en ligne (T39) |
 | Retrouver vite un produit | Depuis l'accueil, une fiche produit s'atteint en 3 actions au plus (recherche ou filtre, puis clic) |
 | Laisser la marque gérer son catalogue seule | Un administrateur ajoute un produit avec ses photos en moins de 5 minutes, sans aide |
 | Être lisible partout | Toutes les pages sont utilisables sur un écran de 360 px de large comme sur ordinateur |
@@ -110,9 +110,9 @@ Le site doit se charger vite, rester sûr et s'utiliser aussi bien sur télépho
 | NF4 | Référencement | Titre et description propres à chaque page, adresses lisibles (slug), images allégées, sitemap.xml soumis à Google Search Console | T31, puis après la mise en ligne |
 | NF5 | Accessibilité de base | Texte alternatif sur les images, étiquette sur chaque champ de formulaire, contrastes lisibles, utilisation au clavier | Contrôle manuel, T32 |
 | NF6 | Langue | Interface en français, une seule langue au départ | D-010 |
-| NF7 | Volume | Conçu pour quelques centaines de produits ; 20 à 30 au départ | 30 produits d'essai (T13), puis les vrais produits (T37) |
-| NF8 | Maintenabilité | Code sur GitHub, une branche par tâche, relecture croisée, README, fichier .env.example, variables d'environnement documentées | Revue en T38 |
-| NF9 | Sauvegarde | Une sauvegarde manuelle de la base est essayée avant la mise en ligne | T33 |
+| NF7 | Volume | Conçu pour quelques centaines de produits ; 20 à 30 au départ | 30 produits d'essai (T13), puis les vrais produits (T39) |
+| NF8 | Maintenabilité | Code sur GitHub, une branche par tâche, relecture croisée, README, fichier .env.example, variables d'environnement documentées | Revue en T40 |
+| NF9 | Sauvegarde | Une sauvegarde manuelle de la base est essayée avant la mise en ligne | T35 |
 
 Seuils proposés, à confirmer : 3 secondes, 360 px, quelques centaines de produits.
 
@@ -122,20 +122,20 @@ Le projet doit tenir en 8 à 10 semaines, avec deux développeurs et un héberge
 
 | Domaine | Contrainte |
 | --- | --- |
-| Équipe | Deux personnes, Salah et Samad, environ 36 jours de 4 h chacun, soit 72,5 jours de travail à deux |
+| Équipe | Deux personnes, Salah et Samad, environ 36,5 et 37,5 jours de 4 h, soit 74 jours de travail à deux |
 | Délai | 8 semaines à 4 h par jour chacun, 10 avec une marge de 20 % pour les imprévus |
 | Technique | React, Vite, Tailwind CSS et React Router ; Node.js et Express ; PostgreSQL avec Prisma ; JWT et bcrypt ; Cloudinary pour les photos |
 | Hébergement | Parcours A du plan de projet, gratuit et sans moyen de paiement : [Firebase Hosting](https://firebase.google.com/pricing), [Render](https://render.com/docs/free), [Neon](https://neon.com/pricing) et [Cloudinary](https://cloudinary.com/pricing) (offres consultées le 7 octobre 2026) |
 | Limite de l'hébergement gratuit | L'API s'endort après 15 minutes sans visite et met environ 1 minute à se réveiller ; Render déconseille cette offre pour un site en production |
-| Budget | Aucun frais d'hébergement pendant l'apprentissage et la démo ; l'achat éventuel d'un nom de domaine se décide en T36 |
+| Budget | Aucun frais d'hébergement pendant l'apprentissage et la démo ; l'achat éventuel d'un nom de domaine se décide en T38 |
 
 **Livrables**
 
 - Le site en ligne, espace client et espace admin, à une adresse web.
 - Le code source sur GitHub (frontend et backend), avec un README.
-- La base de données en ligne, remplie de 20 à 30 produits réels saisis depuis l'admin (T37).
+- La base de données en ligne, remplie de 20 à 30 produits réels saisis depuis l'admin (T39).
 - Un compte administrateur remis à la marque.
-- Une démonstration de l'admin et un bilan du projet (T38).
+- Une démonstration de l'admin et un bilan du projet (T40).
 
 ## 8. Points à confirmer avec le client
 
@@ -147,11 +147,11 @@ Dix points restent à confirmer avec la marque ; chacun a une hypothèse de trav
 | Langue de l'interface : français seulement ? | Français seulement 
 | Monnaie des prix : dinars algériens (DA) ? | Prix en DA, entiers, sans centimes 
 | Coordonnées de contact : téléphone, WhatsApp, e-mail ? | Les trois, fournis par la marque et affichés sur chaque fiche 
-| Qui fournit les 20 à 30 produits, leurs photos et leurs descriptions ? | La marque, avant la tâche T37 
+| Qui fournit les 20 à 30 produits, leurs photos et leurs descriptions ? | La marque, avant la tâche T39
 | Un produit peut-il avoir plusieurs catégories ? | Non, une seule catégorie par produit 
 | Caractéristiques techniques : libres ou fixes par catégorie ? | Libres : une liste « nom : valeur » par produit 
 | Faut-il masquer un produit sans le supprimer (brouillon) ? | Non : un produit ajouté est visible tout de suite 
-| Hébergement gratuit ou payant ? Qui achète et renouvelle le nom de domaine ? | Gratuit pendant l'apprentissage ; domaine à la charge de la marque, acheté en T36 
+| Hébergement gratuit ou payant ? Qui achète et renouvelle le nom de domaine ? | Gratuit pendant l'apprentissage ; domaine à la charge de la marque, acheté en T38
 | Après la mise en ligne : corrections, maintenance, propriété du code ? | Aucune hypothèse : à fixer par écrit avant de commencer 
 
 ## 9. Schéma de la base

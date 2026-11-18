@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "admins" ALTER COLUMN "name" DROP DEFAULT,
+ALTER COLUMN "first_name" DROP DEFAULT,
+ALTER COLUMN "phone" DROP DEFAULT;

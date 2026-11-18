@@ -13,6 +13,7 @@ import AdminLoginPage from './pages/admin/AdminLoginPage.jsx'
 import AdminSignupPage from './pages/admin/AdminSignupPage.jsx'
 import AdminProductFormPage from './pages/admin/AdminProductFormPage.jsx'
 import AdminTaxonomyPage from './pages/admin/AdminTaxonomyPage.jsx'
+import AdminProfilePage from './pages/admin/AdminProfilePage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="admin/products/new" element={<AdminProductFormPage />} />
             <Route path="admin/products/:id/edit" element={<AdminProductFormPage />} />
             <Route path="admin/categories-marques" element={<AdminTaxonomyPage />} />
+            <Route path="admin/profile" element={<AdminProfilePage />} />
           </Route>
           <Route
             path="*"

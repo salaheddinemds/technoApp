@@ -6,6 +6,7 @@ import prisma from '../lib/prisma.js';
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[0-9 ()-]{8,20}$/;
 const dummyPasswordHash = '$2b$12$7Pa54RP2wAYUZU4KfZ/vB.oZY9MmM1UzKDJcFEhYVJUbG83iAf.jq';
+const profileFields = new Set(['email', 'name', 'firstName', 'phone']);
 
 function validationError(response, message) {
   response.status(400).json({
@@ -130,7 +131,70 @@ export function getCurrentAdmin(request, response) {
   response.json({
     data: {
       id: request.admin.id,
-      email: request.admin.email
+      email: request.admin.email,
+      name: request.admin.name,
+      firstName: request.admin.firstName,
+      phone: request.admin.phone
     }
   });
+}
+
+export async function updateCurrentAdmin(request, response) {
+  const body = request.body;
+
+  if (body === null || typeof body !== 'object' || Array.isArray(body)) {
+    validationError(response, 'Le corps doit être un objet JSON.');
+    return;
+  }
+
+  const invalidFields = Object.keys(body).filter((field) => !profileFields.has(field));
+  if (invalidFields.length > 0) {
+    validationError(response, 'Seuls les champs email, name, firstName et phone sont acceptés.');
+    return;
+  }
+
+  const normalizedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
+  const normalizedName = typeof body.name === 'string' ? body.name.trim() : '';
+  const normalizedFirstName = typeof body.firstName === 'string' ? body.firstName.trim() : '';
+  const normalizedPhone = typeof body.phone === 'string' ? body.phone.trim() : '';
+
+  if (
+    !emailPattern.test(normalizedEmail)
+    || normalizedEmail.length > 254
+    || normalizedName.length < 2
+    || normalizedName.length > 80
+    || normalizedFirstName.length < 2
+    || normalizedFirstName.length > 80
+    || !phonePattern.test(normalizedPhone)
+  ) {
+    validationError(response, 'Les informations du profil sont invalides.');
+    return;
+  }
+
+  try {
+    const admin = await prisma.admin.update({
+      where: { id: request.admin.id },
+      data: {
+        email: normalizedEmail,
+        name: normalizedName,
+        firstName: normalizedFirstName,
+        phone: normalizedPhone
+      },
+      select: { id: true, email: true, name: true, firstName: true, phone: true }
+    });
+
+    response.json({ data: admin });
+  } catch (error) {
+    if (error.code === 'P2002') {
+      response.status(409).json({
+        error: {
+          code: 'EMAIL_TAKEN',
+          message: 'Cette adresse e-mail est déjà utilisée.'
+        }
+      });
+      return;
+    }
+
+    throw error;
+  }
 }

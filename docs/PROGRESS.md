@@ -35,6 +35,12 @@ Faits utiles à tout moment. Jamais de mot de passe ni de clé ici.
 
 ## Journal de Salah (le plus récent en haut)
 
+### 2026-11-18
+- Fait : T32 vérifiée avec les tests backend, le lint et le build frontend, puis une checklist HTTP des routes publiques, admin, erreurs, CORS et Helmet.
+- Vérifié : connexion admin, session, liste admin, création et suppression d'une catégorie de test, doublon (409), accès sans jeton (401), recherche vide et fiche produit.
+- Vérifié : rendu du catalogue dans le navigateur avec titre SEO, filtres, recherche, tri et cartes produit ; aucun bug reproductible à corriger.
+- Prochain pas : T33, relier les boutons de connexion et d’inscription aux pages réelles.
+
 ### 2026-11-04
 - Fait : T28 implémentée avec la liste, l'ajout et la suppression des catégories et des marques.
 - Fait : route protégée `/admin/categories-marques` et appels API admin ajoutés ; les erreurs de doublon et de suppression d'une ressource non vide sont affichées.

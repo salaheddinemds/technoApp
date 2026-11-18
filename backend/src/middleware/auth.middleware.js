@@ -44,7 +44,7 @@ export async function requireAdmin(request, response, next) {
 
   const admin = await prisma.admin.findUnique({
     where: { id: Number(payload.sub) },
-    select: { id: true, email: true }
+    select: { id: true, email: true, name: true, firstName: true, phone: true }
   });
 
   if (!admin) {

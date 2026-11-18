@@ -1,11 +1,11 @@
-# Tâches du projet (T01 à T38)
+# Tâches du projet (T01 à T40)
 
 > Source : plan de projet du 7 octobre 2026. Une journée de plan = 4 h de travail concentré par personne.
 > Cocher `[x]` seulement quand la tâche fonctionne **et** est fusionnée dans `main`. Les tâches en cours se notent dans `docs/PROGRESS.md`, pas ici.
 > « Les deux » : chacun y consacre les jours indiqués. « après » : tâches à terminer avant de commencer celle-ci.
 > Format d'une ligne : `- [ ] **ID** Tâche — Qui · durée · après : dépendances`
 
-Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
+Total : Salah 36,5 j · Samad 37,5 j · 74 jours de travail à deux.
 
 ## Phase 0 — Préparation et bases (Salah 7,5 j · Samad 8 j)
 
@@ -52,16 +52,21 @@ Total : Salah 36 j · Samad 36,5 j · 72,5 jours de travail à deux.
 - [x] **T29** Sécurité de base : CORS, en-têtes Helmet, limite de requêtes, secrets dans le fichier .env — Salah · 1,5 j · après : T24
 - [x] **T30** Messages d'erreur clairs côté API et interface, page 404, validation des formulaires — Salah · 1,5 j · après : T28
 - [x] **T31** Référencement et vitesse : titres et descriptions de page, URLs lisibles, images allégées, favicon — Samad · 1,5 j · après : T20
-- [ ] **T32** Tests manuels croisés avec une liste de contrôle, puis corrections — Les deux · 2 j · après : T29, T30, T31
+- [x] **T32** Tests manuels croisés avec une liste de contrôle, puis corrections — Les deux · 2 j · après : T29, T30, T31
+
+## Phase 4 bis — Finalisation de l'authentification (Salah 0,5 j · Samad 1 j)
+
+- [x] **T33** Relier les boutons « Se connecter » et « Créer un compte » du site aux pages réelles `/admin/login` et `/admin/signup` — Samad · 0,5 j · après : T32
+- [x] **T34** Vérifier le parcours complet d’authentification : inscription avec code, connexion, session persistante, accès admin et déconnexion — Les deux · 1 j · après : T33
 
 ## Phase 5 — Mise en ligne (Salah 4,5 j · Samad 2,5 j)
 
-- [ ] **T33** Base de données en ligne (Neon), migrations, essai de sauvegarde manuelle — Salah · 1 j · après : T32
-- [ ] **T34** Déployer l'API (Render ou Cloud Run), variables d'environnement, lecture des journaux — Salah · 1,5 j · après : T33
-- [ ] **T35** Déployer le frontend (Firebase Hosting) et le relier à l'API, CORS de production — Samad · 1 j · après : T34
-- [ ] **T36** Nom de domaine et HTTPS, si vous en achetez un — Salah · 0,5 j · après : T35
-- [ ] **T37** Saisir les vrais produits (20 à 30) depuis l'admin et corriger ce qui gêne — Les deux · 1 j · après : T35
-- [ ] **T38** README, démonstration et bilan : ce que vous avez appris, ce qui reste à améliorer — Les deux · 0,5 j · après : T37
+- [ ] **T35** Base de données en ligne (Neon), migrations, essai de sauvegarde manuelle — Salah · 1 j · après : T34
+- [ ] **T36** Déployer l’API (Render ou Cloud Run), variables d’environnement, lecture des journaux — Salah · 1,5 j · après : T35
+- [ ] **T37** Déployer le frontend (Firebase Hosting) et le relier à l’API, CORS de production — Samad · 1 j · après : T36
+- [ ] **T38** Nom de domaine et HTTPS, si vous en achetez un — Salah · 0,5 j · après : T37
+- [ ] **T39** Saisir les vrais produits (20 à 30) depuis l’admin et corriger ce qui gêne — Les deux · 1 j · après : T37
+- [ ] **T40** README, démonstration et bilan : ce que vous avez appris, ce qui reste à améliorer — Les deux · 0,5 j · après : T39
 
 ## Plus tard (hors MVP : n'y toucher qu'après la phase 5)
 
